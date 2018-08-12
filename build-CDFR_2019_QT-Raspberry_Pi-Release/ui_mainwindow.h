@@ -155,7 +155,7 @@ public:
 
         gridLayoutWidget_2 = new QWidget(centralWidget);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(0, 0, 486, 40));
+        gridLayoutWidget_2->setGeometry(QRect(0, 0, 486, 57));
         gridLayout_2 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_2->setSpacing(0);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);

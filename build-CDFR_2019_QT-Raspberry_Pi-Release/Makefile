@@ -357,7 +357,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_ressources.cpp
 qrc_ressources.cpp: ../CDFR_2019_QT/ressources.qrc \
 		/home/guillaume/raspi/qt5/bin/rcc \
+		../CDFR_2019_QT/images/cbot_logo_transparent_small.png \
 		../CDFR_2019_QT/images/baseline_home_black_48dp.png \
+		../CDFR_2019_QT/images/cbot_logo_transparent.png \
+		../CDFR_2019_QT/images/CBOT_new_logo.png \
 		../CDFR_2019_QT/images/baseline_play_circle_outline_white_48dp.png \
 		../CDFR_2019_QT/images/baseline_info_white_48dp.png \
 		../CDFR_2019_QT/images/baseline_link_black_48dp.png \
@@ -365,7 +368,8 @@ qrc_ressources.cpp: ../CDFR_2019_QT/ressources.qrc \
 		../CDFR_2019_QT/images/baseline_build_white_48dp.png \
 		../CDFR_2019_QT/images/baseline_help_outline_white_48dp.png \
 		../CDFR_2019_QT/images/baseline_battery_80_black_48dp.png \
-		../CDFR_2019_QT/images/baseline_settings_white_48dp.png
+		../CDFR_2019_QT/images/baseline_settings_white_48dp.png \
+		../CDFR_2019_QT/images/cbot_logo_transparent_small_sans_text.png
 	/home/guillaume/raspi/qt5/bin/rcc -name ressources ../CDFR_2019_QT/ressources.qrc -o qrc_ressources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -622,7 +626,12 @@ main.o: ../CDFR_2019_QT/main.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qeventloop.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qdesktopwidget.h \
 		/home/guillaume/raspi/qt5pi/include/QtGui/qguiapplication.h \
-		/home/guillaume/raspi/qt5pi/include/QtGui/qinputmethod.h
+		/home/guillaume/raspi/qt5pi/include/QtGui/qinputmethod.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QTimer \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtimer.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbasictimer.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QSplashScreen \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qsplashscreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../CDFR_2019_QT/main.cpp
 
 mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
@@ -746,6 +755,8 @@ mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtGui/qinputmethod.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QButtonGroup \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qbuttongroup.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QFrame \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qframe.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QGridLayout \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qgridlayout.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qlayout.h \
@@ -755,7 +766,6 @@ mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qheaderview.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractitemview.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractscrollarea.h \
-		/home/guillaume/raspi/qt5pi/include/QtWidgets/qframe.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qabstractitemmodel.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qitemselectionmodel.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractitemdelegate.h \

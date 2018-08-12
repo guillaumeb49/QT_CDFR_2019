@@ -9,5 +9,9 @@
         <file>images/baseline_home_black_48dp.png</file>
         <file>images/baseline_battery_80_black_48dp.png</file>
         <file>images/baseline_link_black_48dp.png</file>
+        <file>images/cbot_logo_transparent.png</file>
+        <file>images/cbot_logo_transparent_small.png</file>
+        <file>images/cbot_logo_transparent_small_sans_text.png</file>
+        <file>images/CBOT_new_logo.png</file>
     </qresource>
 </RCC>
