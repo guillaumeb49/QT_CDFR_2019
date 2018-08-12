@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/new/icon">
+        <file>images/baseline-play_circle_outline-24px.svg</file>
+        <file>images/baseline_play_circle_outline_white_48dp.png</file>
+        <file>images/baseline_settings_white_48dp.png</file>
+        <file>images/baseline_info_white_48dp.png</file>
+        <file>images/baseline_build_white_48dp.png</file>
+        <file>images/baseline_help_outline_white_48dp.png</file>
+        <file>images/baseline_home_black_48dp.png</file>
+        <file>images/baseline_battery_80_black_48dp.png</file>
+        <file>images/baseline_link_black_48dp.png</file>
+    </qresource>
+</RCC>

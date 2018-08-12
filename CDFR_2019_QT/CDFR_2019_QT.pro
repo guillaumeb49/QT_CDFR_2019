@@ -35,3 +35,9 @@ FORMS += \
 
 target.path = /home/pi
 INSTALLS += target
+
+DISTFILES += \
+    images/baseline-play_circle_outline-24px.svg
+
+RESOURCES += \
+    ressources.qrc

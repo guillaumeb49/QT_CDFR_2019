@@ -51,11 +51,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../CDFR_2019_QT/main.cpp \
-		../CDFR_2019_QT/mainwindow.cpp moc_mainwindow.cpp
+		../CDFR_2019_QT/mainwindow.cpp qrc_ressources.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		qrc_ressources.o \
 		moc_mainwindow.o
-DIST          = /home/guillaume/raspi/qt5/mkspecs/features/spec_pre.prf \
+DIST          = ../CDFR_2019_QT/images/baseline-play_circle_outline-24px.svg \
+		/home/guillaume/raspi/qt5/mkspecs/features/spec_pre.prf \
 		/home/guillaume/raspi/qt5/mkspecs/common/unix.conf \
 		/home/guillaume/raspi/qt5/mkspecs/common/linux.conf \
 		/home/guillaume/raspi/qt5/mkspecs/common/sanitize.conf \
@@ -221,6 +224,7 @@ Makefile: ../CDFR_2019_QT/CDFR_2019_QT.pro /home/guillaume/raspi/qt5/mkspecs/dev
 		/home/guillaume/raspi/qt5/mkspecs/features/yacc.prf \
 		/home/guillaume/raspi/qt5/mkspecs/features/lex.prf \
 		../CDFR_2019_QT/CDFR_2019_QT.pro \
+		../CDFR_2019_QT/ressources.qrc \
 		/home/guillaume/raspi/qt5pi/lib/libQt5Widgets.prl \
 		/home/guillaume/raspi/qt5pi/lib/libQt5Gui.prl \
 		/home/guillaume/raspi/qt5pi/lib/libQt5Core.prl
@@ -302,6 +306,7 @@ Makefile: ../CDFR_2019_QT/CDFR_2019_QT.pro /home/guillaume/raspi/qt5/mkspecs/dev
 /home/guillaume/raspi/qt5/mkspecs/features/yacc.prf:
 /home/guillaume/raspi/qt5/mkspecs/features/lex.prf:
 ../CDFR_2019_QT/CDFR_2019_QT.pro:
+../CDFR_2019_QT/ressources.qrc:
 /home/guillaume/raspi/qt5pi/lib/libQt5Widgets.prl:
 /home/guillaume/raspi/qt5pi/lib/libQt5Gui.prl:
 /home/guillaume/raspi/qt5pi/lib/libQt5Core.prl:
@@ -319,6 +324,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../CDFR_2019_QT/ressources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/guillaume/raspi/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../CDFR_2019_QT/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../CDFR_2019_QT/main.cpp ../CDFR_2019_QT/mainwindow.cpp $(DISTDIR)/
@@ -346,8 +352,22 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_ressources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_ressources.cpp
+qrc_ressources.cpp: ../CDFR_2019_QT/ressources.qrc \
+		/home/guillaume/raspi/qt5/bin/rcc \
+		../CDFR_2019_QT/images/baseline_home_black_48dp.png \
+		../CDFR_2019_QT/images/baseline_play_circle_outline_white_48dp.png \
+		../CDFR_2019_QT/images/baseline_info_white_48dp.png \
+		../CDFR_2019_QT/images/baseline_link_black_48dp.png \
+		../CDFR_2019_QT/images/baseline-play_circle_outline-24px.svg \
+		../CDFR_2019_QT/images/baseline_build_white_48dp.png \
+		../CDFR_2019_QT/images/baseline_help_outline_white_48dp.png \
+		../CDFR_2019_QT/images/baseline_battery_80_black_48dp.png \
+		../CDFR_2019_QT/images/baseline_settings_white_48dp.png
+	/home/guillaume/raspi/qt5/bin/rcc -name ressources ../CDFR_2019_QT/ressources.qrc -o qrc_ressources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -485,7 +505,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -726,6 +746,11 @@ mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtGui/qinputmethod.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QButtonGroup \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qbuttongroup.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QGridLayout \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qgridlayout.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qlayout.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qlayoutitem.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qboxlayout.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QHeaderView \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qheaderview.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractitemview.h \
@@ -743,14 +768,14 @@ mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qstyle.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qtabbar.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qrubberband.h \
-		/home/guillaume/raspi/qt5pi/include/QtWidgets/QMenuBar \
-		/home/guillaume/raspi/qt5pi/include/QtWidgets/qmenubar.h \
-		/home/guillaume/raspi/qt5pi/include/QtWidgets/qmenu.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QPushButton \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qpushbutton.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractbutton.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../CDFR_2019_QT/mainwindow.cpp
+
+qrc_ressources.o: qrc_ressources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressources.o qrc_ressources.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
