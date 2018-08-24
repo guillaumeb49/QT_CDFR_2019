@@ -13,5 +13,7 @@
         <file>images/cbot_logo_transparent_small.png</file>
         <file>images/cbot_logo_transparent_small_sans_text.png</file>
         <file>images/CBOT_new_logo.png</file>
+        <file>images/baseline_check_black_48dp.png</file>
+        <file>images/baseline_clear_white_48dp.png</file>
     </qresource>
 </RCC>

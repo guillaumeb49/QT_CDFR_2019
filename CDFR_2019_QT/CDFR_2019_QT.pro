@@ -25,13 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    infowindow.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    infowindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    infowindow.ui
 
 target.path = /home/pi
 INSTALLS += target
@@ -41,3 +44,5 @@ DISTFILES += \
 
 RESOURCES += \
     ressources.qrc
+
+QT += network

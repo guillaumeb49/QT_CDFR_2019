@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "infowindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    InfoWindow *Info_wind;
+
+public slots:
+   void openInfoWindow();
+
 };
 
 #endif // MAINWINDOW_H
