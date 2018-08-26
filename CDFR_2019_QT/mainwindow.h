@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "infowindow.h"
+#include "settingswindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,10 +20,11 @@ public:
 private:
     Ui::MainWindow *ui;
     InfoWindow *Info_wind;
+    SettingsWindow *Settings_wind;
 
 public slots:
    void openInfoWindow();
-
+   void openSettingsWindow();
 };
 
 #endif // MAINWINDOW_H

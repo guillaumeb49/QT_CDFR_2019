@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'mainwindow.h'
+** Meta object code from reading C++ file 'tcp_thread.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.10.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../CDFR_2019_QT/mainwindow.h"
+#include "../CDFR_2019_QT/tcp_thread.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'mainwindow.h' doesn't include <QObject>."
+#error "The header file 'tcp_thread.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.10.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,29 +20,31 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[4];
-    char stringdata0[46];
+struct qt_meta_stringdata_TCP_Thread_t {
+    QByteArrayData data[6];
+    char stringdata0[78];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_TCP_Thread_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
+static const qt_meta_stringdata_TCP_Thread_t qt_meta_stringdata_TCP_Thread = {
     {
-QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 14), // "openInfoWindow"
-QT_MOC_LITERAL(2, 26, 0), // ""
-QT_MOC_LITERAL(3, 27, 18) // "openSettingsWindow"
+QT_MOC_LITERAL(0, 0, 10), // "TCP_Thread"
+QT_MOC_LITERAL(1, 11, 25), // "F_ProcessDataReiceivedTCP"
+QT_MOC_LITERAL(2, 37, 0), // ""
+QT_MOC_LITERAL(3, 38, 13), // "F_SendDataTCP"
+QT_MOC_LITERAL(4, 52, 11), // "tcp_command"
+QT_MOC_LITERAL(5, 64, 13) // "s_cmd_to_send"
 
     },
-    "MainWindow\0openInfoWindow\0\0"
-    "openSettingsWindow"
+    "TCP_Thread\0F_ProcessDataReiceivedTCP\0"
+    "\0F_SendDataTCP\0tcp_command\0s_cmd_to_send"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_MainWindow[] = {
+static const uint qt_meta_data_TCP_Thread[] = {
 
  // content:
        7,       // revision
@@ -57,51 +59,50 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    0,   24,    2, 0x0a /* Public */,
-       3,    0,   25,    2, 0x0a /* Public */,
+       3,    1,   25,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 4,    5,
 
        0        // eod
 };
 
-void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void TCP_Thread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        MainWindow *_t = static_cast<MainWindow *>(_o);
+        TCP_Thread *_t = static_cast<TCP_Thread *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->openInfoWindow(); break;
-        case 1: _t->openSettingsWindow(); break;
+        case 0: _t->F_ProcessDataReiceivedTCP(); break;
+        case 1: _t->F_SendDataTCP((*reinterpret_cast< tcp_command(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_MainWindow.data,
-      qt_meta_data_MainWindow,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject TCP_Thread::staticMetaObject = {
+    { &QThread::staticMetaObject, qt_meta_stringdata_TCP_Thread.data,
+      qt_meta_data_TCP_Thread,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *MainWindow::metaObject() const
+const QMetaObject *TCP_Thread::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *MainWindow::qt_metacast(const char *_clname)
+void *TCP_Thread::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_MainWindow.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_TCP_Thread.stringdata0))
         return static_cast<void*>(this);
-    return QMainWindow::qt_metacast(_clname);
+    return QThread::qt_metacast(_clname);
 }
 
-int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int TCP_Thread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QMainWindow::qt_metacall(_c, _id, _a);
+    _id = QThread::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

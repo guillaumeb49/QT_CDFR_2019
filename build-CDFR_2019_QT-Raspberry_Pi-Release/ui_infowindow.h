@@ -135,7 +135,7 @@ public:
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(420, 60, 51, 51));
         label->setStyleSheet(QStringLiteral("color:rgb(138, 226, 52);"));
-        label->setPixmap(QPixmap(QString::fromUtf8(":/new/icon/images/baseline_help_outline_white_48dp.png")));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/new/icon/images/baseline_help_outline_black_48dp.png")));
         label->setScaledContents(true);
         formLayoutWidget = new QWidget(centralwidget);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));

@@ -26,15 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    infowindow.cpp
+    infowindow.cpp \
+    tcp_thread.cpp \
+    settingswindow.cpp
 
 HEADERS += \
         mainwindow.h \
-    infowindow.h
+    infowindow.h \
+    tcp_thread.h \
+    settingswindow.h
 
 FORMS += \
         mainwindow.ui \
-    infowindow.ui
+    infowindow.ui \
+    settingswindow.ui
 
 target.path = /home/pi
 INSTALLS += target

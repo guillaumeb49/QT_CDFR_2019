@@ -15,5 +15,8 @@
         <file>images/CBOT_new_logo.png</file>
         <file>images/baseline_check_black_48dp.png</file>
         <file>images/baseline_clear_white_48dp.png</file>
+        <file>images/baseline_help_outline_black_48dp.png</file>
+        <file>images/baseline_power_settings_new_black_48dp.png</file>
+        <file>images/baseline_settings_black_48dp.png</file>
     </qresource>
 </RCC>

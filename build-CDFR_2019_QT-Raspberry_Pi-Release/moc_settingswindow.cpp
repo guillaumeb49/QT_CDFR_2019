@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'mainwindow.h'
+** Meta object code from reading C++ file 'settingswindow.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.10.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../CDFR_2019_QT/mainwindow.h"
+#include "../CDFR_2019_QT/settingswindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'mainwindow.h' doesn't include <QObject>."
+#error "The header file 'settingswindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.10.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,29 +20,29 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_MainWindow_t {
+struct qt_meta_stringdata_SettingsWindow_t {
     QByteArrayData data[4];
-    char stringdata0[46];
+    char stringdata0[50];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_SettingsWindow_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
+static const qt_meta_stringdata_SettingsWindow_t qt_meta_stringdata_SettingsWindow = {
     {
-QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 14), // "openInfoWindow"
-QT_MOC_LITERAL(2, 26, 0), // ""
-QT_MOC_LITERAL(3, 27, 18) // "openSettingsWindow"
+QT_MOC_LITERAL(0, 0, 14), // "SettingsWindow"
+QT_MOC_LITERAL(1, 15, 15), // "Signal_quit_app"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 17) // "close_application"
 
     },
-    "MainWindow\0openInfoWindow\0\0"
-    "openSettingsWindow"
+    "SettingsWindow\0Signal_quit_app\0\0"
+    "close_application"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_MainWindow[] = {
+static const uint qt_meta_data_SettingsWindow[] = {
 
  // content:
        7,       // revision
@@ -53,53 +53,66 @@ static const uint qt_meta_data_MainWindow[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    0,   24,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   24,    2, 0x0a /* Public */,
        3,    0,   25,    2, 0x0a /* Public */,
 
- // slots: parameters
+ // signals: parameters
     QMetaType::Void,
+
+ // slots: parameters
     QMetaType::Void,
 
        0        // eod
 };
 
-void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void SettingsWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        MainWindow *_t = static_cast<MainWindow *>(_o);
+        SettingsWindow *_t = static_cast<SettingsWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->openInfoWindow(); break;
-        case 1: _t->openSettingsWindow(); break;
+        case 0: _t->Signal_quit_app(); break;
+        case 1: _t->close_application(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            typedef void (SettingsWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SettingsWindow::Signal_quit_app)) {
+                *result = 0;
+                return;
+            }
         }
     }
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_MainWindow.data,
-      qt_meta_data_MainWindow,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject SettingsWindow::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_SettingsWindow.data,
+      qt_meta_data_SettingsWindow,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *MainWindow::metaObject() const
+const QMetaObject *SettingsWindow::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *MainWindow::qt_metacast(const char *_clname)
+void *SettingsWindow::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_MainWindow.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_SettingsWindow.stringdata0))
         return static_cast<void*>(this);
     return QMainWindow::qt_metacast(_clname);
 }
 
-int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int SettingsWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -114,6 +127,12 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 2;
     }
     return _id;
+}
+
+// SIGNAL 0
+void SettingsWindow::Signal_quit_app()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

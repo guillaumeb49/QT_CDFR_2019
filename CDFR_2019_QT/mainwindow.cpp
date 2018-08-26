@@ -8,7 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    Settings_wind = new SettingsWindow();
     connect(ui->btn_info, SIGNAL(clicked(bool)), this, SLOT(openInfoWindow()));
+    connect(ui->btn_settings, SIGNAL(clicked(bool)), this, SLOT(openSettingsWindow()));
+    connect(Settings_wind, SIGNAL(Signal_quit_app()), this, SLOT(close()));
 }
 
 MainWindow::~MainWindow()
@@ -21,4 +24,10 @@ void MainWindow::openInfoWindow()
 {
     Info_wind = new InfoWindow();
     Info_wind->show();
+}
+
+void MainWindow::openSettingsWindow()
+{
+
+    Settings_wind->show();
 }
