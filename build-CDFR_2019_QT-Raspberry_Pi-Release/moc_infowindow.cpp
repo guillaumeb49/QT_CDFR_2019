@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_InfoWindow_t {
-    QByteArrayData data[1];
-    char stringdata0[11];
+    QByteArrayData data[7];
+    char stringdata0[37];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -31,10 +31,16 @@ struct qt_meta_stringdata_InfoWindow_t {
     )
 static const qt_meta_stringdata_InfoWindow_t qt_meta_stringdata_InfoWindow = {
     {
-QT_MOC_LITERAL(0, 0, 10) // "InfoWindow"
+QT_MOC_LITERAL(0, 0, 10), // "InfoWindow"
+QT_MOC_LITERAL(1, 11, 10), // "Update_LED"
+QT_MOC_LITERAL(2, 22, 0), // ""
+QT_MOC_LITERAL(3, 23, 7), // "uint8_t"
+QT_MOC_LITERAL(4, 31, 1), // "r"
+QT_MOC_LITERAL(5, 33, 1), // "g"
+QT_MOC_LITERAL(6, 35, 1) // "b"
 
     },
-    "InfoWindow"
+    "InfoWindow\0Update_LED\0\0uint8_t\0r\0g\0b"
 };
 #undef QT_MOC_LITERAL
 
@@ -44,22 +50,32 @@ static const uint qt_meta_data_InfoWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags
+       1,    3,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    4,    5,    6,
+
        0        // eod
 };
 
 void InfoWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        InfoWindow *_t = static_cast<InfoWindow *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->Update_LED((*reinterpret_cast< uint8_t(*)>(_a[1])),(*reinterpret_cast< uint8_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3]))); break;
+        default: ;
+        }
+    }
 }
 
 QT_INIT_METAOBJECT const QMetaObject InfoWindow::staticMetaObject = {
@@ -84,6 +100,17 @@ void *InfoWindow::qt_metacast(const char *_clname)
 int InfoWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
     return _id;
 }
 QT_WARNING_POP

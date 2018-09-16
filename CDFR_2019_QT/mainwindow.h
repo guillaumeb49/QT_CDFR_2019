@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include "infowindow.h"
 #include "settingswindow.h"
-
+#include "tcp_thread.h"
+#include <iostream>
+#include <QDebug>
 namespace Ui {
 class MainWindow;
 }
@@ -21,7 +23,7 @@ private:
     Ui::MainWindow *ui;
     InfoWindow *Info_wind;
     SettingsWindow *Settings_wind;
-
+    TCP_Thread *tcp_thread;
 public slots:
    void openInfoWindow();
    void openSettingsWindow();

@@ -30,9 +30,9 @@ public:
     QWidget *centralwidget;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label_21;
-    QLabel *label_25;
-    QLabel *label_42;
+    QLabel *lbl_led_red;
+    QLabel *lbl_led_blue;
+    QLabel *lbl_led_green;
     QWidget *gridLayoutWidget_2;
     QGridLayout *gridLayout_4;
     QPushButton *btn_main_menu;
@@ -72,26 +72,26 @@ public:
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_21 = new QLabel(verticalLayoutWidget);
-        label_21->setObjectName(QStringLiteral("label_21"));
-        label_21->setAutoFillBackground(false);
-        label_21->setStyleSheet(QStringLiteral("background-color:rgb(244, 67, 54);"));
+        lbl_led_red = new QLabel(verticalLayoutWidget);
+        lbl_led_red->setObjectName(QStringLiteral("lbl_led_red"));
+        lbl_led_red->setAutoFillBackground(false);
+        lbl_led_red->setStyleSheet(QStringLiteral("background-color:rgb(244, 67, 54);"));
 
-        verticalLayout_3->addWidget(label_21);
+        verticalLayout_3->addWidget(lbl_led_red);
 
-        label_25 = new QLabel(verticalLayoutWidget);
-        label_25->setObjectName(QStringLiteral("label_25"));
-        label_25->setAutoFillBackground(false);
-        label_25->setStyleSheet(QStringLiteral("background-color:rgb(76, 175, 80);"));
+        lbl_led_blue = new QLabel(verticalLayoutWidget);
+        lbl_led_blue->setObjectName(QStringLiteral("lbl_led_blue"));
+        lbl_led_blue->setAutoFillBackground(false);
+        lbl_led_blue->setStyleSheet(QStringLiteral("background-color:rgb(76, 175, 80);"));
 
-        verticalLayout_3->addWidget(label_25);
+        verticalLayout_3->addWidget(lbl_led_blue);
 
-        label_42 = new QLabel(verticalLayoutWidget);
-        label_42->setObjectName(QStringLiteral("label_42"));
-        label_42->setAutoFillBackground(false);
-        label_42->setStyleSheet(QStringLiteral("background-color:rgb(33, 150, 243);"));
+        lbl_led_green = new QLabel(verticalLayoutWidget);
+        lbl_led_green->setObjectName(QStringLiteral("lbl_led_green"));
+        lbl_led_green->setAutoFillBackground(false);
+        lbl_led_green->setStyleSheet(QStringLiteral("background-color:rgb(33, 150, 243);"));
 
-        verticalLayout_3->addWidget(label_42);
+        verticalLayout_3->addWidget(lbl_led_green);
 
         gridLayoutWidget_2 = new QWidget(centralwidget);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
@@ -267,9 +267,9 @@ public:
     void retranslateUi(QMainWindow *InfoWindow)
     {
         InfoWindow->setWindowTitle(QApplication::translate("InfoWindow", "MainWindow", nullptr));
-        label_21->setText(QString());
-        label_25->setText(QString());
-        label_42->setText(QString());
+        lbl_led_red->setText(QString());
+        lbl_led_blue->setText(QString());
+        lbl_led_green->setText(QString());
         btn_main_menu->setText(QString());
         pushButton_12->setText(QString());
         pushButton_13->setText(QString());

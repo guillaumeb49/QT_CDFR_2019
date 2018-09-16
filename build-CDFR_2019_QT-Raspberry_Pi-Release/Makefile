@@ -54,21 +54,25 @@ SOURCES       = ../CDFR_2019_QT/main.cpp \
 		../CDFR_2019_QT/mainwindow.cpp \
 		../CDFR_2019_QT/infowindow.cpp \
 		../CDFR_2019_QT/tcp_thread.cpp \
-		../CDFR_2019_QT/settingswindow.cpp qrc_ressources.cpp \
+		../CDFR_2019_QT/settingswindow.cpp \
+		../CDFR_2019_QT/tcp.cpp qrc_ressources.cpp \
 		moc_mainwindow.cpp \
 		moc_infowindow.cpp \
 		moc_tcp_thread.cpp \
-		moc_settingswindow.cpp
+		moc_settingswindow.cpp \
+		moc_tcp.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		infowindow.o \
 		tcp_thread.o \
 		settingswindow.o \
+		tcp.o \
 		qrc_ressources.o \
 		moc_mainwindow.o \
 		moc_infowindow.o \
 		moc_tcp_thread.o \
-		moc_settingswindow.o
+		moc_settingswindow.o \
+		moc_tcp.o
 DIST          = ../CDFR_2019_QT/images/baseline-play_circle_outline-24px.svg \
 		/home/guillaume/raspi/qt5/mkspecs/features/spec_pre.prf \
 		/home/guillaume/raspi/qt5/mkspecs/common/unix.conf \
@@ -149,11 +153,13 @@ DIST          = ../CDFR_2019_QT/images/baseline-play_circle_outline-24px.svg \
 		../CDFR_2019_QT/CDFR_2019_QT.pro ../CDFR_2019_QT/mainwindow.h \
 		../CDFR_2019_QT/infowindow.h \
 		../CDFR_2019_QT/tcp_thread.h \
-		../CDFR_2019_QT/settingswindow.h ../CDFR_2019_QT/main.cpp \
+		../CDFR_2019_QT/settingswindow.h \
+		../CDFR_2019_QT/tcp.h ../CDFR_2019_QT/main.cpp \
 		../CDFR_2019_QT/mainwindow.cpp \
 		../CDFR_2019_QT/infowindow.cpp \
 		../CDFR_2019_QT/tcp_thread.cpp \
-		../CDFR_2019_QT/settingswindow.cpp
+		../CDFR_2019_QT/settingswindow.cpp \
+		../CDFR_2019_QT/tcp.cpp
 QMAKE_TARGET  = CDFR_2019_QT
 DESTDIR       = 
 TARGET        = CDFR_2019_QT
@@ -346,8 +352,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../CDFR_2019_QT/ressources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/guillaume/raspi/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../CDFR_2019_QT/mainwindow.h ../CDFR_2019_QT/infowindow.h ../CDFR_2019_QT/tcp_thread.h ../CDFR_2019_QT/settingswindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../CDFR_2019_QT/main.cpp ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/infowindow.cpp ../CDFR_2019_QT/tcp_thread.cpp ../CDFR_2019_QT/settingswindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../CDFR_2019_QT/mainwindow.h ../CDFR_2019_QT/infowindow.h ../CDFR_2019_QT/tcp_thread.h ../CDFR_2019_QT/settingswindow.h ../CDFR_2019_QT/tcp.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../CDFR_2019_QT/main.cpp ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/infowindow.cpp ../CDFR_2019_QT/tcp_thread.cpp ../CDFR_2019_QT/settingswindow.cpp ../CDFR_2019_QT/tcp.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../CDFR_2019_QT/mainwindow.ui ../CDFR_2019_QT/infowindow.ui ../CDFR_2019_QT/settingswindow.ui $(DISTDIR)/
 
 
@@ -403,9 +409,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/guillaume/raspi/qt5/mkspecs/features/data/dummy.cpp
 	/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-g++ -march=armv8-a -mtune=cortex-a53 -mfpu=crypto-neon-fp-armv8 -mfloat-abi=hard --sysroot=/home/guillaume/raspi/sysroot -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/guillaume/raspi/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_infowindow.cpp moc_tcp_thread.cpp moc_settingswindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_infowindow.cpp moc_tcp_thread.cpp moc_settingswindow.cpp moc_tcp.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_infowindow.cpp moc_tcp_thread.cpp moc_settingswindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_infowindow.cpp moc_tcp_thread.cpp moc_settingswindow.cpp moc_tcp.cpp
 moc_mainwindow.cpp: /home/guillaume/raspi/qt5pi/include/QtWidgets/QMainWindow \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qmainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qtwidgetsglobal.h \
@@ -565,6 +571,14 @@ moc_mainwindow.cpp: /home/guillaume/raspi/qt5pi/include/QtWidgets/QMainWindow \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qhostaddress.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
+		../CDFR_2019_QT/settingswindow.h \
+		../CDFR_2019_QT/tcp_thread.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QDebug \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
 		../CDFR_2019_QT/mainwindow.h \
 		moc_predefs.h \
 		/home/guillaume/raspi/qt5/bin/moc
@@ -733,10 +747,9 @@ moc_infowindow.cpp: /home/guillaume/raspi/qt5pi/include/QtWidgets/QMainWindow \
 		/home/guillaume/raspi/qt5/bin/moc
 	/home/guillaume/raspi/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/guillaume/raspi/qt5/mkspecs/devices/linux-rasp-pi3-g++ -I/home/guillaume/Documents/CDFR_2019/QT/QT_CDFR_2019/CDFR_2019_QT -I/home/guillaume/raspi/qt5pi/include -I/home/guillaume/raspi/qt5pi/include/QtWidgets -I/home/guillaume/raspi/qt5pi/include/QtGui -I/home/guillaume/raspi/qt5pi/include/QtNetwork -I/home/guillaume/raspi/qt5pi/include/QtCore -I. -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3 -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/arm-linux-gnueabihf -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/backward -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include-fixed -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include -I/home/guillaume/raspi/sysroot/usr/include -I/home/guillaume/raspi/sysroot/usr/include/arm-linux-gnueabihf ../CDFR_2019_QT/infowindow.h -o moc_infowindow.cpp
 
-moc_tcp_thread.cpp: /home/guillaume/raspi/qt5pi/include/QtCore/QObject \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qobject.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qnamespace.h \
+moc_tcp_thread.cpp: /home/guillaume/raspi/qt5pi/include/QtCore/QDebug \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qdebug.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qalgorithms.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qglobal.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig-bootstrapped.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig.h \
@@ -758,43 +771,37 @@ moc_tcp_thread.cpp: /home/guillaume/raspi/qt5pi/include/QtCore/QObject \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qmutex.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qnumeric.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qversiontagging.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs_impl.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qstring.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhash.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qchar.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiterator.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlist.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qrefcount.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qarraydata.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhashfunctions.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstring.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qnamespace.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringliteral.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringalgorithms.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringview.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringbuilder.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qlist.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qalgorithms.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qiterator.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qhashfunctions.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qpair.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearraylist.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringlist.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qregexp.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringmatcher.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmap.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtextstream.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiodevice.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobject.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs_impl.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qcoreevent.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qscopedpointer.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qmetatype.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qvarlengtharray.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qcontainerfwd.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qobject_impl.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetworkglobal.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qiodevice.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qdebug.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qhash.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qmap.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qtextstream.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qlocale.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qvariant.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qshareddata.h \
@@ -804,6 +811,14 @@ moc_tcp_thread.cpp: /home/guillaume/raspi/qt5pi/include/QtCore/QObject \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qcontiguouscache.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetworkglobal.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
 		../CDFR_2019_QT/tcp_thread.h \
 		moc_predefs.h \
 		/home/guillaume/raspi/qt5/bin/moc
@@ -919,6 +934,82 @@ moc_settingswindow.cpp: /home/guillaume/raspi/qt5pi/include/QtWidgets/QMainWindo
 		moc_predefs.h \
 		/home/guillaume/raspi/qt5/bin/moc
 	/home/guillaume/raspi/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/guillaume/raspi/qt5/mkspecs/devices/linux-rasp-pi3-g++ -I/home/guillaume/Documents/CDFR_2019/QT/QT_CDFR_2019/CDFR_2019_QT -I/home/guillaume/raspi/qt5pi/include -I/home/guillaume/raspi/qt5pi/include/QtWidgets -I/home/guillaume/raspi/qt5pi/include/QtGui -I/home/guillaume/raspi/qt5pi/include/QtNetwork -I/home/guillaume/raspi/qt5pi/include/QtCore -I. -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3 -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/arm-linux-gnueabihf -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/backward -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include-fixed -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include -I/home/guillaume/raspi/sysroot/usr/include -I/home/guillaume/raspi/sysroot/usr/include/arm-linux-gnueabihf ../CDFR_2019_QT/settingswindow.h -o moc_settingswindow.cpp
+
+moc_tcp.cpp: /home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobject.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qnamespace.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qglobal.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig-bootstrapped.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtcore-config.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsystemdetection.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qprocessordetection.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcompilerdetection.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtypeinfo.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsysinfo.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlogging.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qflags.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbasicatomic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic_bootstrap.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qgenericatomic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic_cxx11.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic_msvc.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qglobalstatic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmutex.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qnumeric.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qversiontagging.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstring.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qchar.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qrefcount.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qarraydata.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringliteral.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringalgorithms.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringview.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringbuilder.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlist.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qalgorithms.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiterator.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhashfunctions.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qpair.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearraylist.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringlist.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qregexp.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringmatcher.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcoreevent.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qscopedpointer.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmetatype.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qvarlengtharray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcontainerfwd.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobject_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetworkglobal.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiodevice.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qdebug.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhash.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmap.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtextstream.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlocale.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qvariant.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qshareddata.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qvector.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qpoint.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qset.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcontiguouscache.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QAbstractSocket \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QDebug \
+		../CDFR_2019_QT/tcp.h \
+		moc_predefs.h \
+		/home/guillaume/raspi/qt5/bin/moc
+	/home/guillaume/raspi/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/guillaume/raspi/qt5/mkspecs/devices/linux-rasp-pi3-g++ -I/home/guillaume/Documents/CDFR_2019/QT/QT_CDFR_2019/CDFR_2019_QT -I/home/guillaume/raspi/qt5pi/include -I/home/guillaume/raspi/qt5pi/include/QtWidgets -I/home/guillaume/raspi/qt5pi/include/QtGui -I/home/guillaume/raspi/qt5pi/include/QtNetwork -I/home/guillaume/raspi/qt5pi/include/QtCore -I. -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3 -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/arm-linux-gnueabihf -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/backward -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include-fixed -I/home/guillaume/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include -I/home/guillaume/raspi/sysroot/usr/include -I/home/guillaume/raspi/sysroot/usr/include/arm-linux-gnueabihf ../CDFR_2019_QT/tcp.h -o moc_tcp.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1109,13 +1200,19 @@ main.o: ../CDFR_2019_QT/main.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qhostaddress.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
+		../CDFR_2019_QT/settingswindow.h \
+		../CDFR_2019_QT/tcp_thread.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QDebug \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/QTimer \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qtimer.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qbasictimer.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QSplashScreen \
-		/home/guillaume/raspi/qt5pi/include/QtWidgets/qsplashscreen.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qsplashscreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../CDFR_2019_QT/main.cpp
 
 mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
@@ -1278,6 +1375,14 @@ mainwindow.o: ../CDFR_2019_QT/mainwindow.cpp ../CDFR_2019_QT/mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qhostaddress.h \
 		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
+		../CDFR_2019_QT/settingswindow.h \
+		../CDFR_2019_QT/tcp_thread.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QDebug \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
 		ui_mainwindow.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/QFrame
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../CDFR_2019_QT/mainwindow.cpp
@@ -1445,10 +1550,9 @@ infowindow.o: ../CDFR_2019_QT/infowindow.cpp ../CDFR_2019_QT/infowindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infowindow.o ../CDFR_2019_QT/infowindow.cpp
 
 tcp_thread.o: ../CDFR_2019_QT/tcp_thread.cpp ../CDFR_2019_QT/tcp_thread.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qobject.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qnamespace.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QDebug \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qdebug.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qalgorithms.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qglobal.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig-bootstrapped.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig.h \
@@ -1470,43 +1574,37 @@ tcp_thread.o: ../CDFR_2019_QT/tcp_thread.cpp ../CDFR_2019_QT/tcp_thread.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qmutex.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qnumeric.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qversiontagging.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs_impl.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qstring.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhash.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qchar.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiterator.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlist.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qrefcount.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qarraydata.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhashfunctions.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstring.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qnamespace.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringliteral.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringalgorithms.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringview.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringbuilder.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qlist.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qalgorithms.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qiterator.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qhashfunctions.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qpair.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearraylist.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringlist.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qregexp.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qstringmatcher.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmap.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtextstream.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiodevice.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobject.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs_impl.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qcoreevent.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qscopedpointer.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qmetatype.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qvarlengtharray.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qcontainerfwd.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qobject_impl.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetworkglobal.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
-		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qiodevice.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qdebug.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qhash.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qmap.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qtextstream.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qlocale.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qvariant.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qshareddata.h \
@@ -1515,7 +1613,15 @@ tcp_thread.o: ../CDFR_2019_QT/tcp_thread.cpp ../CDFR_2019_QT/tcp_thread.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qset.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qcontiguouscache.h \
 		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer.h \
-		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer_impl.h
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QThread \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qthread.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetworkglobal.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcp_thread.o ../CDFR_2019_QT/tcp_thread.cpp
 
 settingswindow.o: ../CDFR_2019_QT/settingswindow.cpp ../CDFR_2019_QT/settingswindow.h \
@@ -1625,8 +1731,126 @@ settingswindow.o: ../CDFR_2019_QT/settingswindow.cpp ../CDFR_2019_QT/settingswin
 		/home/guillaume/raspi/qt5pi/include/QtGui/qtouchdevice.h \
 		/home/guillaume/raspi/qt5pi/include/QtWidgets/qtabwidget.h \
 		/home/guillaume/raspi/qt5pi/include/QtGui/qicon.h \
-		ui_settingswindow.h
+		ui_settingswindow.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QVariant \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QAction \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qaction.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qactiongroup.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QApplication \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qapplication.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcoreapplication.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qeventloop.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qdesktopwidget.h \
+		/home/guillaume/raspi/qt5pi/include/QtGui/qguiapplication.h \
+		/home/guillaume/raspi/qt5pi/include/QtGui/qinputmethod.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QButtonGroup \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qbuttongroup.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QFormLayout \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qformlayout.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QLayout \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qlayout.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qlayoutitem.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qboxlayout.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qgridlayout.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QGridLayout \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QHeaderView \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qheaderview.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractitemview.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractscrollarea.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qframe.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qabstractitemmodel.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qitemselectionmodel.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractitemdelegate.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qstyleoption.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractspinbox.h \
+		/home/guillaume/raspi/qt5pi/include/QtGui/qvalidator.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qregularexpression.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qslider.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractslider.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qstyle.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qtabbar.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qrubberband.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QLabel \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qlabel.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QPushButton \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qpushbutton.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/qabstractbutton.h \
+		/home/guillaume/raspi/qt5pi/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settingswindow.o ../CDFR_2019_QT/settingswindow.cpp
+
+tcp.o: ../CDFR_2019_QT/tcp.cpp ../CDFR_2019_QT/tcp.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QObject \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobject.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qnamespace.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qglobal.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig-bootstrapped.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qconfig.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtcore-config.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsystemdetection.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qprocessordetection.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcompilerdetection.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtypeinfo.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsysinfo.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlogging.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qflags.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbasicatomic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic_bootstrap.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qgenericatomic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic_cxx11.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qatomic_msvc.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qglobalstatic.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmutex.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qnumeric.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qversiontagging.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobjectdefs_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstring.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qchar.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qrefcount.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qarraydata.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringliteral.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringalgorithms.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringview.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringbuilder.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlist.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qalgorithms.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiterator.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhashfunctions.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qpair.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qbytearraylist.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringlist.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qregexp.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qstringmatcher.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcoreevent.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qscopedpointer.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmetatype.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qvarlengtharray.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcontainerfwd.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qobject_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QTcpSocket \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtcpsocket.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetworkglobal.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qtnetwork-config.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/qabstractsocket.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qiodevice.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qdebug.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qhash.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qmap.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qtextstream.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qlocale.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qvariant.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qshareddata.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qvector.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qpoint.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qset.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qcontiguouscache.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer.h \
+		/home/guillaume/raspi/qt5pi/include/QtCore/qsharedpointer_impl.h \
+		/home/guillaume/raspi/qt5pi/include/QtNetwork/QAbstractSocket \
+		/home/guillaume/raspi/qt5pi/include/QtCore/QDebug
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcp.o ../CDFR_2019_QT/tcp.cpp
 
 qrc_ressources.o: qrc_ressources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressources.o qrc_ressources.cpp
@@ -1642,6 +1866,9 @@ moc_tcp_thread.o: moc_tcp_thread.cpp
 
 moc_settingswindow.o: moc_settingswindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_settingswindow.o moc_settingswindow.cpp
+
+moc_tcp.o: moc_tcp.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tcp.o moc_tcp.cpp
 
 ####### Install
 

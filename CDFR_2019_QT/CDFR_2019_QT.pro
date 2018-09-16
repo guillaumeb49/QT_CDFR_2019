@@ -28,13 +28,15 @@ SOURCES += \
         mainwindow.cpp \
     infowindow.cpp \
     tcp_thread.cpp \
-    settingswindow.cpp
+    settingswindow.cpp \
+    tcp.cpp
 
 HEADERS += \
         mainwindow.h \
     infowindow.h \
     tcp_thread.h \
-    settingswindow.h
+    settingswindow.h \
+    tcp.h
 
 FORMS += \
         mainwindow.ui \

@@ -1,32 +1,80 @@
 #include "tcp_thread.h"
 
+TCP_Thread::TCP_Thread()
+{
+    cmd_id = 0;
+}
+
+
 void TCP_Thread::run()
 {
 
+    qDebug() << "[TCP Socket] Inside Run!";
     socket = new QTcpSocket();
 
+    // Connect Signals / Slots
+    connect(socket,SIGNAL(readyRead()),this,SLOT(F_ProcessDataReiceivedTCP()));
+
+
+    struct tcp_command s_cmd_to_send;
+
     // Try to connect to the Host (STM32)
-    socket->connectToHost("192.168.0.26",7);
+    socket->connectToHost("192.168.1.21",7);
 
     if(socket->waitForConnected(5000))
     {
-        std::cout << "[TCP Socket] Connected to STM32!";
+        qDebug() << "[TCP Socket] Connected to STM32!";
         terminated = false;
 
-        // Connect Signals / Slots
-        connect(socket,SIGNAL(readyRead()),this,SLOT(F_ProcessDataReiceivedTCP()));
+
+
+        s_cmd_to_send.id = 0x01;
+            s_cmd_to_send.nb_octet = 15;
+            s_cmd_to_send.cmd = CMD_GET_LED;
+            s_cmd_to_send.nb_param = 0;
+            s_cmd_to_send.params[0] = 0;
+            s_cmd_to_send.params[1] = 0;
+            s_cmd_to_send.params[2] = 0;
+            s_cmd_to_send.params[3] = 0;
+
+            F_SendDataTCP(s_cmd_to_send);
+
 
     }
     else
     {
-        std::cout << "[TCP Socket] Error connexion to STM32.. \r\n";
-        std::cout << socket->errorString().toStdString();
+        qDebug() << "[TCP Socket] Error connexion to STM32.. \r\n";
+        qDebug() << socket->errorString();
 
         terminated = true;
     }
 
+    qDebug() << "[TCP Socket] Inside while \r\n";
+
+
     while(terminated != true)
     {
+        // if there is command to send to the STM32
+        if(list_cmd_to_send.size() != 0)
+        {
+            // send a command in the waiting list
+            F_SendDataTCP(list_cmd_to_send.first());
+
+            // Wait for the answer
+            if(socket->waitForReadyRead(5000) == false)
+            {
+                // Handle the Error we did not received an answer
+            }
+            else
+            {
+                // The command was correctly sent and we read back the answer
+                // We can safely remove the command from the waiting list
+                list_cmd_to_send.removeFirst();
+            }
+
+        }
+
+
 
     }
 
@@ -37,18 +85,18 @@ void TCP_Thread::F_TCP_answerTotab(uint8_t *array, struct tcp_answer *s_cmd_answ
 {
     uint8_t i = 0, j = 0;
 
-    array[0] = uint8_t(0x000F & (s_cmd_answer->id >> 24));
-    array[1] = uint8_t(0x000F & (s_cmd_answer->id >> 16));
-    array[2] = uint8_t(0x000F & (s_cmd_answer->id >> 8));
-    array[3] = uint8_t(0x000F & s_cmd_answer->id);
+    array[0] = uint8_t(0x00FF & (s_cmd_answer->id >> 24));
+    array[1] = uint8_t(0x00FF & (s_cmd_answer->id >> 16));
+    array[2] = uint8_t(0x00FF & (s_cmd_answer->id >> 8));
+    array[3] = uint8_t(0x00FF & s_cmd_answer->id);
     array[4] = s_cmd_answer->nb_octet;
     array[5] = s_cmd_answer->cmd;
     array[6] = s_cmd_answer->code_retour;
 
     for(i=0;i<SIZE_PARAM_CMD;i++)
     {
-        array[7+j] = uint8_t(0x000F & (s_cmd_answer->reponse[i] >> 8));
-        array[7+j+1] = uint8_t(0x000F & s_cmd_answer->reponse[i]);
+        array[7+j] = uint8_t(0x00FF & (s_cmd_answer->reponse[i] >> 8));
+        array[7+j+1] = uint8_t(0x00FF & s_cmd_answer->reponse[i]);
 
         j+=2;
     }
@@ -56,22 +104,44 @@ void TCP_Thread::F_TCP_answerTotab(uint8_t *array, struct tcp_answer *s_cmd_answ
 
 }
 
+void TCP_Thread::F_TCP_TabToAnswer(uint8_t *array, struct tcp_answer *s_cmd_answer)
+{
+    uint8_t i = 0, j = 0;
+
+    s_cmd_answer->id = uint32_t((array[0] << 24) + (array[1] << 16) +(array[2] << 8) +(array[3]));
+    s_cmd_answer->nb_octet = array[4];
+    s_cmd_answer->cmd = array[5];
+    s_cmd_answer->code_retour = array[6];
+
+
+    for(i=0;i<SIZE_PARAM_CMD;i++)
+    {
+        s_cmd_answer->reponse[i] = uint16_t((array[7+j] << 8) + (array[8+j]));
+        j+=2;
+    }
+
+
+}
+
+
+
+
 void TCP_Thread::F_TCP_cmdTotab(uint8_t *array, struct tcp_command *s_cmd)
 {
     uint8_t i = 0, j = 0;
 
-    array[0] = uint8_t(0x000F & (s_cmd->id >> 24));
-    array[1] = uint8_t(0x000F & (s_cmd->id >> 16));
-    array[2] = uint8_t(0x000F & (s_cmd->id >> 8));
-    array[3] = uint8_t(0x000F & s_cmd->id);
+    array[0] = uint8_t(0x00FF & (s_cmd->id >> 24));
+    array[1] = uint8_t(0x00FF & (s_cmd->id >> 16));
+    array[2] = uint8_t(0x00FF & (s_cmd->id >> 8));
+    array[3] = uint8_t(0x00FF & s_cmd->id);
     array[4] = s_cmd->nb_octet;
     array[5] = s_cmd->cmd;
     array[6] = s_cmd->nb_param;
 
     for(i=0;i<SIZE_PARAM_CMD;i++)
     {
-        array[7+j] = uint8_t(0x000F & (s_cmd->params[i] >> 8));
-        array[7+j+1] = uint8_t(0x000F & s_cmd->params[i]);
+        array[7+j] = uint8_t(0x00FF & (s_cmd->params[i] >> 8));
+        array[7+j+1] = uint8_t(0x00FF & s_cmd->params[i]);
 
         j+=2;
     }
@@ -86,18 +156,26 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
 
     received_data = socket->readAll();
 
+
+
+    qDebug() << "received ("<<received_data.length()<<")\r\n" << received_data << "\r\n";
     for(uint8_t i = 0;i<20;i++)
     {
         array[i] = received_data.at(i);
     }
 
-    F_TCP_answerTotab(array, &s_cmd_answer);
+    F_TCP_TabToAnswer(array, &s_cmd_answer);
+
+    list_answer.append(s_cmd_answer);
+
+    qDebug() << "s_cmd_answer.code_retour = " << s_cmd_answer.code_retour ;
+
 
     if(s_cmd_answer.code_retour != STATUS_OK)
     {
-        std::cout << "[TCP Socket] Erreur last CMD \r\n";
-        std::cout << "[TCP Socket] Last CMD sent :  \r\n";
-        std::cout << "ID : " << last_cmd_sent.id
+        qDebug() << "[TCP Socket] Erreur last CMD \r\n";
+        qDebug() << "[TCP Socket] Last CMD sent :  \r\n";
+        qDebug() << "ID : " << last_cmd_sent.id
                   << "\r\n NB octets : " << last_cmd_sent.nb_octet
                   << "\r\n CMD : " <<last_cmd_sent.cmd
                   << "\r\n NB Params : " <<last_cmd_sent.nb_param
@@ -108,9 +186,9 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
     }
     else // command generated a STATUS_OK response code
     {
-        std::cout << "[TCP Socket] Last CMD OK !\r\n";
-        std::cout << "[TCP Socket] Last CMD sent :  \r\n";
-        std::cout << "ID : " << last_cmd_sent.id
+        qDebug() << "[TCP Socket] Last CMD OK !\r\n";
+        qDebug() << "[TCP Socket] Last CMD sent :  \r\n";
+        qDebug() << "ID : " << last_cmd_sent.id
                   << "\r\n NB octets : " << last_cmd_sent.nb_octet
                   << "\r\n CMD : " <<last_cmd_sent.cmd
                   << "\r\n NB Params : " <<last_cmd_sent.nb_param
@@ -119,6 +197,16 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
                   << "\r\n Param[2] : " <<last_cmd_sent.params[2]
                   << "\r\n Param[3] : " <<last_cmd_sent.params[3];
 
+        qDebug() << "[TCP Socket] Answer :  \r\n";
+        qDebug() << "ID : " << s_cmd_answer.id
+                  << "\r\n NB octets : " << s_cmd_answer.nb_octet
+                  << "\r\n CMD : " <<s_cmd_answer.cmd
+                  << "\r\n Answer[0] : " <<s_cmd_answer.reponse[0]
+                  << "\r\n Answer[1] : " <<s_cmd_answer.reponse[1]
+                  << "\r\n Answer[2] : " <<s_cmd_answer.reponse[2]
+                  << "\r\n Answer[3] : " <<s_cmd_answer.reponse[3];
+
+
 
         // Process the answer
         switch (s_cmd_answer.cmd) {
@@ -126,6 +214,13 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             break;
 
             case CMD_SET_LED:
+            break;
+
+            case CMD_GET_LED:
+
+            // trigger signal to update LED values on GUI
+            emit(Update_LED((s_cmd_answer.reponse[0] & 0x04) >> 2,(s_cmd_answer.reponse[0] & 0x02) >> 1,(s_cmd_answer.reponse[0] & 0x01)));
+
             break;
 
             case CMD_GET_DISTANCES:
@@ -171,4 +266,31 @@ void TCP_Thread::F_SendDataTCP(tcp_command s_cmd_to_send)
     }
 
     socket->write(params_char,15);
+    socket->flush();
+    list_cmd.append(s_cmd_to_send);
+}
+
+
+
+void TCP_Thread::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_SET_LED;
+    s_cmd_to_send.nb_param = 4;
+
+
+    //s_cmd_to_send.params[0] = (r & 0x01)+(g & 0x01<< )+(b & 0x01 );
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+
+
 }

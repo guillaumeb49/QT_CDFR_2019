@@ -25,7 +25,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <widget class="QLabel" name="label_21">
+      <widget class="QLabel" name="lbl_led_red">
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
@@ -38,7 +38,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_25">
+      <widget class="QLabel" name="lbl_led_blue">
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
@@ -51,7 +51,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_42">
+      <widget class="QLabel" name="lbl_led_green">
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
