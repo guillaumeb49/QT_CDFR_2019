@@ -1,12 +1,11 @@
-#ifndef TCP_THREAD_H
-#define TCP_THREAD_H
+#ifndef TCP_HANDLER_H
+#define TCP_HANDLER_H
 
 #include <QDebug>
 
 #include <QObject>
-#include <QThread>
-#include <QTcpSocket>
 #include <QVector>
+#include <QTcpSocket>
 
 
 #define NB_OCTETS_CMD       15
@@ -53,16 +52,16 @@ struct tcp_answer
 };
 
 
-
-
-class TCP_Thread : public QObject
+class TCP_Handler
 {
-    Q_OBJECT
 public:
-    TCP_Thread();
+    TCP_Handler();
     void F_TCP_answerTotab(uint8_t *array, struct tcp_answer *s_cmd_answer);
     void F_TCP_cmdTotab(uint8_t *array, struct tcp_command *s_cmd);
     void F_TCP_TabToAnswer(uint8_t *array, struct tcp_answer *s_cmd_answer);
+
+    void F_ProcessDataReiceivedTCP(QByteArray received_data);
+    void F_SendDataTCP(QTcpSocket *socket, tcp_command s_cmd_to_send);
 
     void F_TCP_GetINFO();
     void F_TCP_SetLED(uint8_t r,uint8_t g,uint8_t b);
@@ -78,11 +77,8 @@ public:
     void F_TCP_GetlistPoints();
     bool getConnexion_state() const;
 
-
-
 private :
     bool terminated;
-    QTcpSocket *socket;
     tcp_command last_cmd_sent;
     tcp_answer last_answer_received;
     uint32_t cmd_id;
@@ -92,14 +88,6 @@ private :
 
     bool connexion_state;
 
-
-signals:
-
-    void Update_LED(uint8_t, uint8_t, uint8_t);
-
-public slots:
-    void F_ProcessDataReiceivedTCP(void);
-    void F_SendDataTCP(tcp_command s_cmd_to_send);
 };
 
-#endif // TCP_THREAD_H
+#endif // TCP_HANDLER_H

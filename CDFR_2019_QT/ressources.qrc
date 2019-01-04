@@ -18,5 +18,8 @@
         <file>images/baseline_help_outline_black_48dp.png</file>
         <file>images/baseline_power_settings_new_black_48dp.png</file>
         <file>images/baseline_settings_black_48dp.png</file>
+        <file>images/baseline_build_black_48dp.png</file>
+        <file>images/baseline_rss_feed_black_48dp.png</file>
+        <file>images/baseline_rss_feed_white_48dp.png</file>
     </qresource>
 </RCC>

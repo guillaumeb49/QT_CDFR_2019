@@ -1,119 +1,13 @@
-#include "tcp_thread.h"
+#include "tcp_handler.h"
 
-TCP_Thread::TCP_Thread()
+TCP_Handler::TCP_Handler()
 {
     cmd_id = 0;
     connexion_state = false;
-
-    struct tcp_command s_cmd_to_send;
-    qDebug() << "[TCP Socket] Inside Run!";
-    socket = new QTcpSocket();
-    // Connect Signals / Slots
-    connect(socket,SIGNAL(readyRead()),this,SLOT(F_ProcessDataReiceivedTCP()));
-    // Try to connect to the Host (STM32)
-    socket->connectToHost("192.168.1.21",7);
-
-
-    if(socket->waitForConnected(5000))
-    {
-        qDebug() << "[TCP Socket] Connected to STM32!";
-        terminated = false;
-
-        connexion_state = true;
-
-
-        s_cmd_to_send.id = 0x01;
-        s_cmd_to_send.nb_octet = 15;
-        s_cmd_to_send.cmd = CMD_GET_LED;
-        s_cmd_to_send.nb_param = 0;
-        s_cmd_to_send.params[0] = 0;
-        s_cmd_to_send.params[1] = 0;
-        s_cmd_to_send.params[2] = 0;
-        s_cmd_to_send.params[3] = 0;
-
-        F_SendDataTCP(s_cmd_to_send);
-    }
-    else
-    {
-        qDebug() << "[TCP Socket] Error connexion to STM32.. \r\n";
-        qDebug() << socket->errorString();
-
-        terminated = true;
-
-        connexion_state = false;
-    }
-
-
 }
 
-/*
-void TCP_Thread::run()
-{
-struct tcp_command s_cmd_to_send;
-    qDebug() << "[TCP Socket] Inside Run!";
-    socket = new QTcpSocket();
-    // Connect Signals / Slots
-    connect(socket,SIGNAL(readyRead()),this,SLOT(F_ProcessDataReiceivedTCP()));
-    // Try to connect to the Host (STM32)
-    socket->connectToHost("192.168.1.21",7);
 
-    if(socket->waitForConnected(5000))
-    {
-        qDebug() << "[TCP Socket] Connected to STM32!";
-        terminated = false;
-
-        connexion_state = true;
-
-
-        s_cmd_to_send.id = 0x01;
-        s_cmd_to_send.nb_octet = 15;
-        s_cmd_to_send.cmd = CMD_GET_LED;
-        s_cmd_to_send.nb_param = 0;
-        s_cmd_to_send.params[0] = 0;
-        s_cmd_to_send.params[1] = 0;
-        s_cmd_to_send.params[2] = 0;
-        s_cmd_to_send.params[3] = 0;
-
-        F_SendDataTCP(s_cmd_to_send);
-    }
-    else
-    {
-        qDebug() << "[TCP Socket] Error connexion to STM32.. \r\n";
-        qDebug() << socket->errorString();
-
-        terminated = true;
-
-        connexion_state = false;
-    }
-
-
-
- /*   while(terminated != true)
-    {
-        // if there is command to send to the STM32
-        if(list_cmd_to_send.size() != 0)
-        {
-            // send a command in the waiting list
-            F_SendDataTCP(list_cmd_to_send.first());
-
-            // Wait for the answer
-            if(socket->waitForReadyRead(5000) == false)
-            {
-                // Handle the Error we did not received an answer
-            }
-            else
-            {
-                // The command was correctly sent and we read back the answer
-                // We can safely remove the command from the waiting list
-                list_cmd_to_send.removeFirst();
-            }
-        }
-        this->msleep(100);
-    }*/
-//}
-
-
-void TCP_Thread::F_TCP_answerTotab(uint8_t *array, struct tcp_answer *s_cmd_answer)
+void TCP_Handler::F_TCP_answerTotab(uint8_t *array, struct tcp_answer *s_cmd_answer)
 {
     uint8_t i = 0, j = 0;
 
@@ -136,7 +30,7 @@ void TCP_Thread::F_TCP_answerTotab(uint8_t *array, struct tcp_answer *s_cmd_answ
 
 }
 
-void TCP_Thread::F_TCP_TabToAnswer(uint8_t *array, struct tcp_answer *s_cmd_answer)
+void TCP_Handler::F_TCP_TabToAnswer(uint8_t *array, struct tcp_answer *s_cmd_answer)
 {
     uint8_t i = 0, j = 0;
 
@@ -151,14 +45,11 @@ void TCP_Thread::F_TCP_TabToAnswer(uint8_t *array, struct tcp_answer *s_cmd_answ
         s_cmd_answer->reponse[i] = uint16_t((array[7+j] << 8) + (array[8+j]));
         j+=2;
     }
-
-
 }
 
 
 
-
-void TCP_Thread::F_TCP_cmdTotab(uint8_t *array, struct tcp_command *s_cmd)
+void TCP_Handler::F_TCP_cmdTotab(uint8_t *array, struct tcp_command *s_cmd)
 {
     uint8_t i = 0, j = 0;
 
@@ -180,13 +71,11 @@ void TCP_Thread::F_TCP_cmdTotab(uint8_t *array, struct tcp_command *s_cmd)
 }
 
 
-void TCP_Thread::F_ProcessDataReiceivedTCP()
+void TCP_Handler::F_ProcessDataReiceivedTCP(QByteArray received_data)
 {
-    QByteArray received_data;
+
     uint8_t array[20] = {0};
     struct tcp_answer s_cmd_answer;
-
-    received_data = socket->readAll();
 
     qDebug() << "received ("<<received_data.length()<<")\r\n" << received_data << "\r\n";
     for(uint8_t i = 0;i<20;i++)
@@ -249,7 +138,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             case CMD_GET_LED:
 
             // trigger signal to update LED values on GUI
-            emit(Update_LED((s_cmd_answer.reponse[0] & 0x04) >> 2,(s_cmd_answer.reponse[0] & 0x02) >> 1,(s_cmd_answer.reponse[0] & 0x01)));
+           // emit(Update_LED((s_cmd_answer.reponse[0] & 0x04) >> 2,(s_cmd_answer.reponse[0] & 0x02) >> 1,(s_cmd_answer.reponse[0] & 0x01)));
 
             break;
 
@@ -281,8 +170,8 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
     }
 
 }
-
-void TCP_Thread::F_SendDataTCP(tcp_command s_cmd_to_send)
+/*
+void TCP_Handler::F_SendDataTCP(QTcpSocket *socket, tcp_command s_cmd_to_send)
 {
     uint8_t params[20] = {0};
     char params_char[20] = {0};
@@ -302,7 +191,7 @@ void TCP_Thread::F_SendDataTCP(tcp_command s_cmd_to_send)
 
 
 
-void TCP_Thread::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
+void TCP_Handler::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
 {
     struct tcp_command s_cmd_to_send;
 
@@ -324,25 +213,8 @@ void TCP_Thread::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
 
 
 }
-
-void TCP_Thread::F_TCP_GetLED()
-{
-    struct tcp_command s_cmd_to_send;
-    qDebug() << "DANS GET LED !";
-
-    s_cmd_to_send.id = 0x01;
-    s_cmd_to_send.nb_octet = 15;
-    s_cmd_to_send.cmd = CMD_GET_LED;
-    s_cmd_to_send.nb_param = 0;
-    s_cmd_to_send.params[0] = 0;
-    s_cmd_to_send.params[1] = 0;
-    s_cmd_to_send.params[2] = 0;
-    s_cmd_to_send.params[3] = 0;
-
-    F_SendDataTCP(s_cmd_to_send);
-}
-
-bool TCP_Thread::getConnexion_state() const
+*/
+bool TCP_Handler::getConnexion_state() const
 {
     return connexion_state;
 }

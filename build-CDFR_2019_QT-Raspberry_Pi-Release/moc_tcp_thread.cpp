@@ -101,7 +101,7 @@ void TCP_Thread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject TCP_Thread::staticMetaObject = {
-    { &QThread::staticMetaObject, qt_meta_stringdata_TCP_Thread.data,
+    { &QObject::staticMetaObject, qt_meta_stringdata_TCP_Thread.data,
       qt_meta_data_TCP_Thread,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -116,12 +116,12 @@ void *TCP_Thread::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_TCP_Thread.stringdata0))
         return static_cast<void*>(this);
-    return QThread::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int TCP_Thread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QThread::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

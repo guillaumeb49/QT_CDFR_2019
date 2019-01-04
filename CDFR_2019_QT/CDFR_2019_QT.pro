@@ -29,19 +29,24 @@ SOURCES += \
     infowindow.cpp \
     tcp_thread.cpp \
     settingswindow.cpp \
-    tcp.cpp
+    tcp.cpp \
+    tcp_handler.cpp \
+    testwindow.cpp
 
 HEADERS += \
         mainwindow.h \
     infowindow.h \
     tcp_thread.h \
     settingswindow.h \
-    tcp.h
+    tcp.h \
+    tcp_handler.h \
+    testwindow.h
 
 FORMS += \
         mainwindow.ui \
     infowindow.ui \
-    settingswindow.ui
+    settingswindow.ui \
+    testwindow.ui
 
 target.path = /home/pi
 INSTALLS += target
