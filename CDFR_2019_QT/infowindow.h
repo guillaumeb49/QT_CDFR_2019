@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui_infowindow.h"
 #include <QNetworkInterface>
+#include <QDebug>
 
 
 namespace Ui {

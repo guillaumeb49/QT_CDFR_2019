@@ -3,6 +3,7 @@
 TCP_Thread::TCP_Thread()
 {
     cmd_id = 0;
+    connexion_state = false;
 }
 
 
@@ -26,20 +27,19 @@ void TCP_Thread::run()
         qDebug() << "[TCP Socket] Connected to STM32!";
         terminated = false;
 
+        connexion_state = true;
 
 
         s_cmd_to_send.id = 0x01;
-            s_cmd_to_send.nb_octet = 15;
-            s_cmd_to_send.cmd = CMD_GET_LED;
-            s_cmd_to_send.nb_param = 0;
-            s_cmd_to_send.params[0] = 0;
-            s_cmd_to_send.params[1] = 0;
-            s_cmd_to_send.params[2] = 0;
-            s_cmd_to_send.params[3] = 0;
+        s_cmd_to_send.nb_octet = 15;
+        s_cmd_to_send.cmd = CMD_GET_LED;
+        s_cmd_to_send.nb_param = 0;
+        s_cmd_to_send.params[0] = 0;
+        s_cmd_to_send.params[1] = 0;
+        s_cmd_to_send.params[2] = 0;
+        s_cmd_to_send.params[3] = 0;
 
-            F_SendDataTCP(s_cmd_to_send);
-
-
+        F_SendDataTCP(s_cmd_to_send);
     }
     else
     {
@@ -47,9 +47,10 @@ void TCP_Thread::run()
         qDebug() << socket->errorString();
 
         terminated = true;
+
+        connexion_state = false;
     }
 
-    qDebug() << "[TCP Socket] Inside while \r\n";
 
 
     while(terminated != true)
@@ -71,13 +72,9 @@ void TCP_Thread::run()
                 // We can safely remove the command from the waiting list
                 list_cmd_to_send.removeFirst();
             }
-
         }
-
-
-
+        this->msleep(100);
     }
-
 }
 
 
@@ -293,4 +290,9 @@ void TCP_Thread::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
     cmd_id++;
 
 
+}
+
+bool TCP_Thread::getConnexion_state() const
+{
+    return connexion_state;
 }

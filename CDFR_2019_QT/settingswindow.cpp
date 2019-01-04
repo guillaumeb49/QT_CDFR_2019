@@ -18,7 +18,6 @@ SettingsWindow::~SettingsWindow()
 
 void SettingsWindow::close_application(void)
 {
-
     emit(Signal_quit_app());
     this->close();
 }

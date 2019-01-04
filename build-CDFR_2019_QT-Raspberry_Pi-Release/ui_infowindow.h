@@ -44,9 +44,9 @@ public:
     QLabel *label_43;
     QLabel *lbl_ip;
     QLabel *label_45;
-    QLabel *label_46;
+    QLabel *lbl_Connexion_STM32;
     QLabel *label_47;
-    QLabel *label_48;
+    QLabel *lbl_Connexion_Capteurs;
     QLabel *label_49;
     QLabel *label_50;
     QLabel *label_51;
@@ -164,15 +164,15 @@ public:
 
         formLayout_3->setWidget(1, QFormLayout::LabelRole, label_45);
 
-        label_46 = new QLabel(formLayoutWidget);
-        label_46->setObjectName(QStringLiteral("label_46"));
-        label_46->setFont(font);
-        label_46->setAutoFillBackground(false);
-        label_46->setStyleSheet(QStringLiteral(""));
-        label_46->setScaledContents(false);
-        label_46->setAlignment(Qt::AlignCenter);
+        lbl_Connexion_STM32 = new QLabel(formLayoutWidget);
+        lbl_Connexion_STM32->setObjectName(QStringLiteral("lbl_Connexion_STM32"));
+        lbl_Connexion_STM32->setFont(font);
+        lbl_Connexion_STM32->setAutoFillBackground(false);
+        lbl_Connexion_STM32->setStyleSheet(QStringLiteral(""));
+        lbl_Connexion_STM32->setScaledContents(false);
+        lbl_Connexion_STM32->setAlignment(Qt::AlignCenter);
 
-        formLayout_3->setWidget(1, QFormLayout::FieldRole, label_46);
+        formLayout_3->setWidget(1, QFormLayout::FieldRole, lbl_Connexion_STM32);
 
         label_47 = new QLabel(formLayoutWidget);
         label_47->setObjectName(QStringLiteral("label_47"));
@@ -180,12 +180,12 @@ public:
 
         formLayout_3->setWidget(2, QFormLayout::LabelRole, label_47);
 
-        label_48 = new QLabel(formLayoutWidget);
-        label_48->setObjectName(QStringLiteral("label_48"));
-        label_48->setFont(font);
-        label_48->setAlignment(Qt::AlignCenter);
+        lbl_Connexion_Capteurs = new QLabel(formLayoutWidget);
+        lbl_Connexion_Capteurs->setObjectName(QStringLiteral("lbl_Connexion_Capteurs"));
+        lbl_Connexion_Capteurs->setFont(font);
+        lbl_Connexion_Capteurs->setAlignment(Qt::AlignCenter);
 
-        formLayout_3->setWidget(2, QFormLayout::FieldRole, label_48);
+        formLayout_3->setWidget(2, QFormLayout::FieldRole, lbl_Connexion_Capteurs);
 
         label_49 = new QLabel(formLayoutWidget);
         label_49->setObjectName(QStringLiteral("label_49"));
@@ -277,9 +277,9 @@ public:
         label_43->setText(QApplication::translate("InfoWindow", "Adresse IP", nullptr));
         lbl_ip->setText(QApplication::translate("InfoWindow", "XXX.XXX.XX.XX", nullptr));
         label_45->setText(QApplication::translate("InfoWindow", "Connexion STM32", nullptr));
-        label_46->setText(QApplication::translate("InfoWindow", "OK", nullptr));
+        lbl_Connexion_STM32->setText(QApplication::translate("InfoWindow", "OK", nullptr));
         label_47->setText(QApplication::translate("InfoWindow", "Connexion capteurs", nullptr));
-        label_48->setText(QApplication::translate("InfoWindow", "OK", nullptr));
+        lbl_Connexion_Capteurs->setText(QApplication::translate("InfoWindow", "OK", nullptr));
         label_49->setText(QApplication::translate("InfoWindow", "Etat Batterie", nullptr));
         label_50->setText(QApplication::translate("InfoWindow", "60 %", nullptr));
         label_51->setText(QApplication::translate("InfoWindow", "Distance 1", nullptr));

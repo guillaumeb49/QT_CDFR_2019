@@ -19,6 +19,7 @@ InfoWindow::InfoWindow(QWidget *parent) :
 
 
 
+
 }
 
 InfoWindow::~InfoWindow()
@@ -28,6 +29,7 @@ InfoWindow::~InfoWindow()
 
 void InfoWindow::Update_LED(uint8_t r,uint8_t g,uint8_t b)
 {
+    qDebug() << "Dans Update LED !!";
     if(r == 0)
     {
         ui->lbl_led_red->setStyleSheet("background-color:rgb(239, 239, 239);");

@@ -77,6 +77,9 @@ public:
     void F_TCP_AddPoint();
     void F_TCP_RemovePoint();
     void F_TCP_GetlistPoints();
+    bool getConnexion_state() const;
+
+
 
 private :
     bool terminated;
@@ -87,6 +90,8 @@ private :
     QVector <tcp_command> list_cmd;
     QVector <tcp_command> list_cmd_to_send;
     QVector <tcp_answer> list_answer;
+
+    bool connexion_state;
 
 
 signals:
