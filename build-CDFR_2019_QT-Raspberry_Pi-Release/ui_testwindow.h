@@ -39,10 +39,10 @@ public:
     QWidget *tab;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *btn_red1;
+    QPushButton *btn_blue;
     QLabel *label_2;
-    QPushButton *pushButton_3;
+    QPushButton *btn_green;
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
@@ -50,14 +50,14 @@ public:
     QWidget *tab_2;
     QWidget *gridLayoutWidget_3;
     QGridLayout *gridLayout_2;
-    QLabel *label_14;
+    QLabel *lbl_distance_sensor4;
     QLabel *label_10;
-    QLabel *label_11;
+    QLabel *lbl_distance_sensor1;
     QLabel *label_15;
     QLabel *label_8;
     QLabel *label_7;
-    QLabel *label_13;
-    QLabel *label_12;
+    QLabel *lbl_distance_sensor3;
+    QLabel *lbl_distance_sensor2;
     QFrame *line;
     QFrame *line_2;
     QFrame *line_3;
@@ -65,6 +65,11 @@ public:
     QLabel *label_9;
     QWidget *tab_3;
     QWidget *tab_4;
+    QWidget *tab_6;
+    QPushButton *pushButton_5;
+    QLabel *label_16;
+    QLabel *label_17;
+    QLabel *label_18;
     QWidget *tab_5;
     QScrollArea *scrollArea_debug;
     QWidget *scrollAreaWidgetContents;
@@ -138,19 +143,19 @@ public:
         gridLayout->setHorizontalSpacing(2);
         gridLayout->setVerticalSpacing(0);
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(gridLayoutWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setAutoFillBackground(false);
-        pushButton->setStyleSheet(QStringLiteral("background-color:red;"));
-        pushButton->setFlat(false);
+        btn_red1 = new QPushButton(gridLayoutWidget);
+        btn_red1->setObjectName(QStringLiteral("btn_red1"));
+        btn_red1->setAutoFillBackground(false);
+        btn_red1->setStyleSheet(QStringLiteral("background-color:red;"));
+        btn_red1->setFlat(false);
 
-        gridLayout->addWidget(pushButton, 2, 0, 1, 1);
+        gridLayout->addWidget(btn_red1, 2, 0, 1, 1);
 
-        pushButton_2 = new QPushButton(gridLayoutWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setStyleSheet(QStringLiteral("background-color:blue;"));
+        btn_blue = new QPushButton(gridLayoutWidget);
+        btn_blue->setObjectName(QStringLiteral("btn_blue"));
+        btn_blue->setStyleSheet(QStringLiteral("background-color:blue;"));
 
-        gridLayout->addWidget(pushButton_2, 3, 0, 1, 1);
+        gridLayout->addWidget(btn_blue, 3, 0, 1, 1);
 
         label_2 = new QLabel(gridLayoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
@@ -160,11 +165,11 @@ public:
 
         gridLayout->addWidget(label_2, 2, 1, 1, 1);
 
-        pushButton_3 = new QPushButton(gridLayoutWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setStyleSheet(QStringLiteral("background-color:green;"));
+        btn_green = new QPushButton(gridLayoutWidget);
+        btn_green->setObjectName(QStringLiteral("btn_green"));
+        btn_green->setStyleSheet(QStringLiteral("background-color:green;"));
 
-        gridLayout->addWidget(pushButton_3, 4, 0, 1, 1);
+        gridLayout->addWidget(btn_green, 4, 0, 1, 1);
 
         label_3 = new QLabel(gridLayoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
@@ -199,25 +204,25 @@ public:
         gridLayout_2 = new QGridLayout(gridLayoutWidget_3);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_14 = new QLabel(gridLayoutWidget_3);
-        label_14->setObjectName(QStringLiteral("label_14"));
+        lbl_distance_sensor4 = new QLabel(gridLayoutWidget_3);
+        lbl_distance_sensor4->setObjectName(QStringLiteral("lbl_distance_sensor4"));
         QFont font;
         font.setBold(true);
         font.setWeight(75);
-        label_14->setFont(font);
+        lbl_distance_sensor4->setFont(font);
 
-        gridLayout_2->addWidget(label_14, 2, 3, 1, 1);
+        gridLayout_2->addWidget(lbl_distance_sensor4, 2, 3, 1, 1);
 
         label_10 = new QLabel(gridLayoutWidget_3);
         label_10->setObjectName(QStringLiteral("label_10"));
 
         gridLayout_2->addWidget(label_10, 0, 2, 1, 1);
 
-        label_11 = new QLabel(gridLayoutWidget_3);
-        label_11->setObjectName(QStringLiteral("label_11"));
-        label_11->setFont(font);
+        lbl_distance_sensor1 = new QLabel(gridLayoutWidget_3);
+        lbl_distance_sensor1->setObjectName(QStringLiteral("lbl_distance_sensor1"));
+        lbl_distance_sensor1->setFont(font);
 
-        gridLayout_2->addWidget(label_11, 2, 0, 1, 1);
+        gridLayout_2->addWidget(lbl_distance_sensor1, 2, 0, 1, 1);
 
         label_15 = new QLabel(gridLayoutWidget_3);
         label_15->setObjectName(QStringLiteral("label_15"));
@@ -234,17 +239,17 @@ public:
 
         gridLayout_2->addWidget(label_7, 0, 1, 1, 1);
 
-        label_13 = new QLabel(gridLayoutWidget_3);
-        label_13->setObjectName(QStringLiteral("label_13"));
-        label_13->setFont(font);
+        lbl_distance_sensor3 = new QLabel(gridLayoutWidget_3);
+        lbl_distance_sensor3->setObjectName(QStringLiteral("lbl_distance_sensor3"));
+        lbl_distance_sensor3->setFont(font);
 
-        gridLayout_2->addWidget(label_13, 2, 2, 1, 1);
+        gridLayout_2->addWidget(lbl_distance_sensor3, 2, 2, 1, 1);
 
-        label_12 = new QLabel(gridLayoutWidget_3);
-        label_12->setObjectName(QStringLiteral("label_12"));
-        label_12->setFont(font);
+        lbl_distance_sensor2 = new QLabel(gridLayoutWidget_3);
+        lbl_distance_sensor2->setObjectName(QStringLiteral("lbl_distance_sensor2"));
+        lbl_distance_sensor2->setFont(font);
 
-        gridLayout_2->addWidget(label_12, 2, 1, 1, 1);
+        gridLayout_2->addWidget(lbl_distance_sensor2, 2, 1, 1, 1);
 
         line = new QFrame(gridLayoutWidget_3);
         line->setObjectName(QStringLiteral("line"));
@@ -288,6 +293,21 @@ public:
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
         tabWidget->addTab(tab_4, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName(QStringLiteral("tab_6"));
+        pushButton_5 = new QPushButton(tab_6);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(330, 30, 131, 61));
+        label_16 = new QLabel(tab_6);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setGeometry(QRect(40, 10, 131, 21));
+        label_17 = new QLabel(tab_6);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(40, 40, 131, 21));
+        label_18 = new QLabel(tab_6);
+        label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setGeometry(QRect(40, 70, 131, 21));
+        tabWidget->addTab(tab_6, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
         scrollArea_debug = new QScrollArea(tab_5);
@@ -303,7 +323,7 @@ public:
         scrollArea_debug->setWidget(scrollAreaWidgetContents);
         pushButton_4 = new QPushButton(tab_5);
         pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setGeometry(QRect(423, 10, 55, 25));
+        pushButton_4->setGeometry(QRect(425, 10, 40, 25));
         tabWidget->addTab(tab_5, QString());
         TestWindow->setCentralWidget(centralwidget);
         gridLayoutWidget_2->raise();
@@ -312,7 +332,7 @@ public:
 
         retranslateUi(TestWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(TestWindow);
@@ -325,27 +345,32 @@ public:
         btn_main_menu->setText(QString());
         pushButton_12->setText(QString());
         pushButton_13->setText(QString());
-        pushButton->setText(QString());
-        pushButton_2->setText(QString());
-        label_2->setText(QApplication::translate("TestWindow", "TextLabel", nullptr));
-        pushButton_3->setText(QString());
-        label_3->setText(QApplication::translate("TestWindow", "TextLabel", nullptr));
-        label_4->setText(QApplication::translate("TestWindow", "TextLabel", nullptr));
+        btn_red1->setText(QString());
+        btn_blue->setText(QString());
+        label_2->setText(QString());
+        btn_green->setText(QString());
+        label_3->setText(QString());
+        label_4->setText(QString());
         label_5->setText(QApplication::translate("TestWindow", "INPUT", nullptr));
         label_6->setText(QApplication::translate("TestWindow", "OUTPUT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("TestWindow", "LED", nullptr));
-        label_14->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
-        label_10->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2603</p><p align=\"center\">(0x0000)</p></body></html>", nullptr));
-        label_11->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
-        label_15->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2604</p><p align=\"center\">(0x0000)</p></body></html>", nullptr));
-        label_8->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2601<br/>(0x0000)</p></body></html>", nullptr));
-        label_7->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2602<br/>(0x0000)</p></body></html>", nullptr));
-        label_13->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
-        label_12->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
+        lbl_distance_sensor4->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
+        label_10->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2603<br/>(0x14)</p></body></html>", nullptr));
+        lbl_distance_sensor1->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
+        label_15->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2604<br/>(0x16)</p></body></html>", nullptr));
+        label_8->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2601<br/>(0x10)</p></body></html>", nullptr));
+        label_7->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">Capteur n\302\2602<br/>(0x12)</p></body></html>", nullptr));
+        lbl_distance_sensor3->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
+        lbl_distance_sensor2->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
         label_9->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TestWindow", "Distance", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("TestWindow", "Position", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("TestWindow", "Servo", nullptr));
+        pushButton_5->setText(QApplication::translate("TestWindow", "Send Test", nullptr));
+        label_16->setText(QApplication::translate("TestWindow", "1. GET LED", nullptr));
+        label_17->setText(QApplication::translate("TestWindow", "2. SET LED", nullptr));
+        label_18->setText(QApplication::translate("TestWindow", "3. GET LED", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("TestWindow", "Test", nullptr));
         pushButton_4->setText(QApplication::translate("TestWindow", "Clear", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("TestWindow", "Debug", nullptr));
     } // retranslateUi

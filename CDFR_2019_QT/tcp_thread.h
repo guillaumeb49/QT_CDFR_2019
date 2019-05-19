@@ -25,6 +25,9 @@
 #define CMD_REMOVE_POINT	0x09
 #define CMD_GET_LIST_POINTS	0x0A
 
+#define CMD_GET_TIRETTE     0x0B
+
+
 #define STATUS_OK			0x00
 #define STATUS_UNKNOWN_CMD	0x01
 #define STATUS_ERROR_PARAM	0x02
@@ -67,7 +70,7 @@ public:
     void F_TCP_GetINFO();
     void F_TCP_SetLED(uint8_t r,uint8_t g,uint8_t b);
     void F_TCP_GetLED();
-    void F_TCP_GetDistances();
+    void F_TCP_GetDistances(uint16_t sensor_number);
 
     void F_TCP_SetPosition();
     void F_TCP_GetPosition();
@@ -97,9 +100,35 @@ signals:
 
     void Update_LED(uint8_t, uint8_t, uint8_t);
 
+    /**
+     * @brief Update_Distance Update the Sensor distance value (get info from STM32)
+     * @param sensor_number Unique number of the sensor
+     * @param distance_mm Distance in mm
+     */
+    void Update_Distance(uint16_t,uint16_t,uint16_t,uint16_t);
+
+    /**
+     * @brief Update_Tirette Update the current state of the tirette : 1 tirette is armed, 0 tirette is out
+     */
+    void Update_Tirette(uint16_t);
+
+
+
+    void Update_StatusConnexionSTM32(uint8_t);
+
 public slots:
     void F_ProcessDataReiceivedTCP(void);
     void F_SendDataTCP(tcp_command s_cmd_to_send);
+    void F_Set_LED_RED_ON();
+    void F_Set_LED_BLUE_ON();
+    void F_Set_LED_GREEN_ON();
+    void F_Get_Distances();
+
+    void F_Get_Tirette();
+
+
+    void F_ReconnectTCP();
+
 };
 
 #endif // TCP_THREAD_H

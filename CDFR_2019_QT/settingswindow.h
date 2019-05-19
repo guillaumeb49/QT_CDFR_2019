@@ -2,7 +2,7 @@
 #define SETTINGSWINDOW_H
 
 #include <QMainWindow>
-
+#include <QProcess>
 namespace Ui {
 class SettingsWindow;
 }
@@ -17,9 +17,14 @@ public:
 
 signals:
     void Signal_quit_app();
+    void Signal_reconnectST();
 
 public slots:
     void close_application(void);
+    void update_statusConnexionST(uint8_t status);
+
+private slots:
+    void on_btn_connect_stm32_clicked();
 
 private:
     Ui::SettingsWindow *ui;

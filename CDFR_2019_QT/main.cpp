@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QPixmap pixmap(":/new/icon/images/CBOT_new_logo.png");
+    QPixmap pixmap(":/new/icon/images/LogoCBotIcon_Splash.png");
     QSplashScreen splash(pixmap);
     splash.show();
     a.thread()->sleep(2); // wait for just 1 second and then show main window

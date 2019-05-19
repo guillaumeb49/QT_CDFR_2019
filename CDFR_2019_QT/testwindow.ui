@@ -127,7 +127,7 @@
      <enum>QTabWidget::North</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -159,7 +159,7 @@
         <number>0</number>
        </property>
        <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="btn_red1">
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
@@ -175,7 +175,7 @@
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="btn_blue">
          <property name="styleSheet">
           <string notr="true">background-color:blue;</string>
          </property>
@@ -190,7 +190,7 @@
           <enum>QFrame::NoFrame</enum>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
          <property name="textFormat">
           <enum>Qt::AutoText</enum>
@@ -201,7 +201,7 @@
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="btn_green">
          <property name="styleSheet">
           <string notr="true">background-color:green;</string>
          </property>
@@ -213,14 +213,14 @@
        <item row="3" column="1">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -274,7 +274,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="2" column="3">
-        <widget class="QLabel" name="label_14">
+        <widget class="QLabel" name="lbl_distance_sensor4">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -289,12 +289,12 @@
        <item row="0" column="2">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°3&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(0x0000)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°3&lt;br/&gt;(0x14)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_11">
+        <widget class="QLabel" name="lbl_distance_sensor1">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -309,26 +309,26 @@
        <item row="0" column="3">
         <widget class="QLabel" name="label_15">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°4&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;(0x0000)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°4&lt;br/&gt;(0x16)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°1&lt;br/&gt;(0x0000)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°1&lt;br/&gt;(0x10)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°2&lt;br/&gt;(0x0000)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Capteur n°2&lt;br/&gt;(0x12)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QLabel" name="label_13">
+        <widget class="QLabel" name="lbl_distance_sensor3">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -341,7 +341,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLabel" name="label_12">
+        <widget class="QLabel" name="lbl_distance_sensor2">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -419,6 +419,63 @@
       <string>Servo</string>
      </attribute>
     </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>Test</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>131</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Send Test</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>1. GET LED</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>40</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2. SET LED</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>70</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>3. GET LED</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tab_5">
      <attribute name="title">
       <string>Debug</string>
@@ -456,9 +513,9 @@ color:green;</string>
      <widget class="QPushButton" name="pushButton_4">
       <property name="geometry">
        <rect>
-        <x>423</x>
+        <x>425</x>
         <y>10</y>
-        <width>55</width>
+        <width>40</width>
         <height>25</height>
        </rect>
       </property>

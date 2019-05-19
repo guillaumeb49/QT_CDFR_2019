@@ -30,8 +30,9 @@ SOURCES += \
     tcp_thread.cpp \
     settingswindow.cpp \
     tcp.cpp \
-    tcp_handler.cpp \
-    testwindow.cpp
+    testwindow.cpp \
+    gamewindow.cpp \
+    ingamedialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,14 +40,17 @@ HEADERS += \
     tcp_thread.h \
     settingswindow.h \
     tcp.h \
-    tcp_handler.h \
-    testwindow.h
+    testwindow.h \
+    gamewindow.h \
+    ingamedialog.h
 
 FORMS += \
         mainwindow.ui \
     infowindow.ui \
     settingswindow.ui \
-    testwindow.ui
+    testwindow.ui \
+    gamewindow.ui \
+    ingamedialog.ui
 
 target.path = /home/pi
 INSTALLS += target

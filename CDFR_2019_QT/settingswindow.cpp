@@ -18,6 +18,26 @@ SettingsWindow::~SettingsWindow()
 
 void SettingsWindow::close_application(void)
 {
+    QProcess process;
+    process.startDetached("shutdown -P now");
+
     emit(Signal_quit_app());
     this->close();
+}
+
+void SettingsWindow::update_statusConnexionST(uint8_t status)
+{
+    if(status == 1)
+    {
+        ui->lbl_status_connexion_st->setText("Connected !!");
+    }
+    else
+    {
+        ui->lbl_status_connexion_st->setText("Not Connected ...");
+    }
+}
+
+void SettingsWindow::on_btn_connect_stm32_clicked()
+{
+    emit(Signal_reconnectST());
 }

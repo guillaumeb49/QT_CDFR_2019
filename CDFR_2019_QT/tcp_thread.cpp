@@ -14,7 +14,7 @@ TCP_Thread::TCP_Thread()
     socket->connectToHost("192.168.1.21",7);
 
 
-    if(socket->waitForConnected(5000))
+    if(socket->waitForConnected(20000))
     {
         qDebug() << "[TCP Socket] Connected to STM32!";
         terminated = false;
@@ -179,7 +179,9 @@ void TCP_Thread::F_TCP_cmdTotab(uint8_t *array, struct tcp_command *s_cmd)
     }
 }
 
-
+/**
+ * @brief TCP_Thread::F_ProcessDataReiceivedTCP Read the TCP socket, handle the data received
+ */
 void TCP_Thread::F_ProcessDataReiceivedTCP()
 {
     QByteArray received_data;
@@ -247,13 +249,13 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             break;
 
             case CMD_GET_LED:
-
-            // trigger signal to update LED values on GUI
-            emit(Update_LED((s_cmd_answer.reponse[0] & 0x04) >> 2,(s_cmd_answer.reponse[0] & 0x02) >> 1,(s_cmd_answer.reponse[0] & 0x01)));
-
+                // trigger signal to update LED values on GUI
+                emit(Update_LED((s_cmd_answer.reponse[0] & 0x04) >> 2,(s_cmd_answer.reponse[0] & 0x02) >> 1,(s_cmd_answer.reponse[0] & 0x01)));
             break;
 
             case CMD_GET_DISTANCES:
+                // Trigger signal to update distance value on GUI
+                emit(Update_Distance(s_cmd_answer.reponse[0], s_cmd_answer.reponse[1], s_cmd_answer.reponse[2], s_cmd_answer.reponse[3]));
             break;
 
             case CMD_SET_POSITION:
@@ -274,12 +276,15 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             case CMD_GET_LIST_POINTS:
             break;
 
+            case CMD_GET_TIRETTE:
+                // Trigger signal to update tirette state  on GUI
+                emit(Update_Tirette(s_cmd_answer.reponse[0]));
+            break;
+
             default:
             break;
         }
-
     }
-
 }
 
 void TCP_Thread::F_SendDataTCP(tcp_command s_cmd_to_send)
@@ -300,7 +305,136 @@ void TCP_Thread::F_SendDataTCP(tcp_command s_cmd_to_send)
     list_cmd.append(s_cmd_to_send);
 }
 
+void TCP_Thread::F_Set_LED_RED_ON()
+{
+    struct tcp_command s_cmd_to_send;
 
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_SET_LED;
+    s_cmd_to_send.nb_param = 4;
+
+
+    s_cmd_to_send.params[0] = 4;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Set_LED_BLUE_ON()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_SET_LED;
+    s_cmd_to_send.nb_param = 4;
+
+
+    s_cmd_to_send.params[0] = 1;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Set_LED_GREEN_ON()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_SET_LED;
+    s_cmd_to_send.nb_param = 4;
+
+
+    s_cmd_to_send.params[0] = 2;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Get_Distances()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_GET_DISTANCES;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = 0;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+
+void TCP_Thread::F_Get_Tirette()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_GET_TIRETTE;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = 0;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+
+void TCP_Thread::F_ReconnectTCP()
+{
+    // Try to connect to the Host
+    socket->connectToHost("192.168.1.21",7);
+
+
+    if(socket->waitForConnected(20000))
+    {
+        qDebug() << "[TCP Socket] Connected to STM32!";
+        terminated = false;
+
+        connexion_state = true;
+        emit(Update_StatusConnexionSTM32(1));
+    }
+    else
+    {
+        qDebug() << "[TCP Socket] Error connexion to STM32.. \r\n";
+        qDebug() << socket->errorString();
+
+        emit(Update_StatusConnexionSTM32(0));
+
+    }
+}
 
 void TCP_Thread::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
 {
@@ -324,11 +458,12 @@ void TCP_Thread::F_TCP_SetLED(uint8_t r, uint8_t g, uint8_t b)
 
 
 }
-
+/**
+ * @brief TCP_Thread::F_TCP_GetLED Send the command to get the value of the LEDs on the STM32 board
+ */
 void TCP_Thread::F_TCP_GetLED()
 {
     struct tcp_command s_cmd_to_send;
-    qDebug() << "DANS GET LED !";
 
     s_cmd_to_send.id = 0x01;
     s_cmd_to_send.nb_octet = 15;
@@ -340,7 +475,38 @@ void TCP_Thread::F_TCP_GetLED()
     s_cmd_to_send.params[3] = 0;
 
     F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
 }
+
+
+
+/**
+ * @brief TCP_Thread::F_TCP_GetDistances Get the from the sensors connected to the STM32
+ * @param sensor_number Sensor number
+ */
+void TCP_Thread::F_TCP_GetDistances(uint16_t sensor_number)
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = 0x01;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_GET_DISTANCES;
+    s_cmd_to_send.nb_param = 1;
+    s_cmd_to_send.params[0] = sensor_number;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+
+
 
 bool TCP_Thread::getConnexion_state() const
 {

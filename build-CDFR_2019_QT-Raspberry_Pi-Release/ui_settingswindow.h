@@ -35,6 +35,8 @@ public:
     QPushButton *pushButton_13;
     QWidget *formLayoutWidget;
     QFormLayout *formLayout_3;
+    QPushButton *btn_connect_stm32;
+    QLabel *lbl_status_connexion_st;
     QPushButton *btn_exit;
 
     void setupUi(QMainWindow *SettingsWindow)
@@ -94,6 +96,17 @@ public:
         formLayout_3 = new QFormLayout(formLayoutWidget);
         formLayout_3->setObjectName(QStringLiteral("formLayout_3"));
         formLayout_3->setContentsMargins(0, 0, 0, 0);
+        btn_connect_stm32 = new QPushButton(formLayoutWidget);
+        btn_connect_stm32->setObjectName(QStringLiteral("btn_connect_stm32"));
+
+        formLayout_3->setWidget(0, QFormLayout::FieldRole, btn_connect_stm32);
+
+        lbl_status_connexion_st = new QLabel(formLayoutWidget);
+        lbl_status_connexion_st->setObjectName(QStringLiteral("lbl_status_connexion_st"));
+        lbl_status_connexion_st->setAlignment(Qt::AlignCenter);
+
+        formLayout_3->setWidget(1, QFormLayout::FieldRole, lbl_status_connexion_st);
+
         btn_exit = new QPushButton(centralwidget);
         btn_exit->setObjectName(QStringLiteral("btn_exit"));
         btn_exit->setGeometry(QRect(420, 270, 60, 50));
@@ -115,6 +128,8 @@ public:
         btn_main_menu->setText(QString());
         pushButton_12->setText(QString());
         pushButton_13->setText(QString());
+        btn_connect_stm32->setText(QApplication::translate("SettingsWindow", "Connect STM32", nullptr));
+        lbl_status_connexion_st->setText(QString());
         btn_exit->setText(QString());
     } // retranslateUi
 

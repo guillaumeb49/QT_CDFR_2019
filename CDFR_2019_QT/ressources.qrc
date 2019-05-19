@@ -21,5 +21,6 @@
         <file>images/baseline_build_black_48dp.png</file>
         <file>images/baseline_rss_feed_black_48dp.png</file>
         <file>images/baseline_rss_feed_white_48dp.png</file>
+        <file>images/LogoCBotIcon_Splash.png</file>
     </qresource>
 </RCC>

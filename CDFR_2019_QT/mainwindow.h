@@ -6,6 +6,7 @@
 #include "settingswindow.h"
 #include "testwindow.h"
 #include "tcp_thread.h"
+#include "gamewindow.h"
 #include <iostream>
 #include <QDebug>
 
@@ -28,6 +29,7 @@ private:
     InfoWindow *Info_wind;
     SettingsWindow *Settings_wind;
     TestWindow *Test_wind;
+    GameWindow *Game_wind;
     TCP_Thread *tcp_thread;
 
     QTcpSocket *socket;
@@ -35,6 +37,7 @@ private:
 public slots:
    void openInfoWindow();
    void openSettingsWindow();
+   void openGameWindow();
    void DataReceived();
 private slots:
    void openTestWindow();
