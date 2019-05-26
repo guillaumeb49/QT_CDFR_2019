@@ -54,6 +54,14 @@ public:
     QWidget *tab_game;
     QLabel *lbl_stateMachine;
     QLCDNumber *lcdNumber;
+    QWidget *gridLayoutWidget_3;
+    QGridLayout *gridLayout_2;
+    QLabel *label_10;
+    QLabel *label_19;
+    QLabel *label_16;
+    QLabel *lbl_x;
+    QLabel *lbl_y;
+    QLabel *lbl_theta;
     QWidget *tab_end_game;
     QWidget *gridLayoutWidget_4;
     QGridLayout *gridLayout_3;
@@ -198,12 +206,66 @@ public:
         lbl_stateMachine->setAlignment(Qt::AlignCenter);
         lcdNumber = new QLCDNumber(tab_game);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        lcdNumber->setGeometry(QRect(13, 10, 451, 171));
+        lcdNumber->setGeometry(QRect(13, 10, 311, 171));
         lcdNumber->setFrameShape(QFrame::NoFrame);
-        lcdNumber->setSmallDecimalPoint(false);
+        lcdNumber->setSmallDecimalPoint(true);
         lcdNumber->setDigitCount(2);
         lcdNumber->setSegmentStyle(QLCDNumber::Filled);
-        lcdNumber->setProperty("value", QVariant(0));
+        lcdNumber->setProperty("value", QVariant(90));
+        gridLayoutWidget_3 = new QWidget(tab_game);
+        gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
+        gridLayoutWidget_3->setGeometry(QRect(300, 0, 171, 171));
+        gridLayout_2 = new QGridLayout(gridLayoutWidget_3);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        label_10 = new QLabel(gridLayoutWidget_3);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        QFont font;
+        font.setPointSize(16);
+        font.setBold(true);
+        font.setWeight(75);
+        label_10->setFont(font);
+        label_10->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(label_10, 0, 0, 1, 1);
+
+        label_19 = new QLabel(gridLayoutWidget_3);
+        label_19->setObjectName(QStringLiteral("label_19"));
+        label_19->setFont(font);
+        label_19->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(label_19, 2, 0, 1, 1);
+
+        label_16 = new QLabel(gridLayoutWidget_3);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setFont(font);
+        label_16->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(label_16, 1, 0, 1, 1);
+
+        lbl_x = new QLabel(gridLayoutWidget_3);
+        lbl_x->setObjectName(QStringLiteral("lbl_x"));
+        QFont font1;
+        font1.setPointSize(14);
+        lbl_x->setFont(font1);
+        lbl_x->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(lbl_x, 0, 1, 1, 1);
+
+        lbl_y = new QLabel(gridLayoutWidget_3);
+        lbl_y->setObjectName(QStringLiteral("lbl_y"));
+        lbl_y->setFont(font1);
+        lbl_y->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(lbl_y, 1, 1, 1, 1);
+
+        lbl_theta = new QLabel(gridLayoutWidget_3);
+        lbl_theta->setObjectName(QStringLiteral("lbl_theta"));
+        lbl_theta->setFont(font1);
+        lbl_theta->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(lbl_theta, 2, 1, 1, 1);
+
         tabWidget->addTab(tab_game, QString());
         tab_end_game = new QWidget();
         tab_end_game->setObjectName(QStringLiteral("tab_end_game"));
@@ -274,25 +336,21 @@ public:
 
         lbl_points_tot = new QLabel(gridLayoutWidget_4);
         lbl_points_tot->setObjectName(QStringLiteral("lbl_points_tot"));
-        QFont font;
-        font.setPointSize(16);
-        font.setBold(true);
-        font.setItalic(true);
-        font.setUnderline(false);
-        font.setWeight(75);
-        font.setStrikeOut(false);
-        lbl_points_tot->setFont(font);
+        QFont font2;
+        font2.setPointSize(16);
+        font2.setBold(true);
+        font2.setItalic(true);
+        font2.setUnderline(false);
+        font2.setWeight(75);
+        font2.setStrikeOut(false);
+        lbl_points_tot->setFont(font2);
         lbl_points_tot->setAlignment(Qt::AlignCenter);
 
         gridLayout_3->addWidget(lbl_points_tot, 5, 1, 1, 1);
 
         label_17 = new QLabel(gridLayoutWidget_4);
         label_17->setObjectName(QStringLiteral("label_17"));
-        QFont font1;
-        font1.setPointSize(16);
-        font1.setBold(true);
-        font1.setWeight(75);
-        label_17->setFont(font1);
+        label_17->setFont(font);
         label_17->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_3->addWidget(label_17, 5, 0, 1, 1);
@@ -336,6 +394,12 @@ public:
         btn_start_game->setText(QApplication::translate("GameWindow", "Next", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_set_up), QApplication::translate("GameWindow", "Set-Up", nullptr));
         lbl_stateMachine->setText(QApplication::translate("GameWindow", "TextLabel", nullptr));
+        label_10->setText(QApplication::translate("GameWindow", "X", nullptr));
+        label_19->setText(QApplication::translate("GameWindow", "Theta", nullptr));
+        label_16->setText(QApplication::translate("GameWindow", "Y", nullptr));
+        lbl_x->setText(QString());
+        lbl_y->setText(QString());
+        lbl_theta->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_game), QApplication::translate("GameWindow", "Game!", nullptr));
         checkBox_3->setText(QString());
         label_11->setText(QApplication::translate("GameWindow", "Actions r\303\251alis\303\251es", nullptr));

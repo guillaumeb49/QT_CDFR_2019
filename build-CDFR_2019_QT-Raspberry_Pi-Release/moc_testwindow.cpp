@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TestWindow_t {
-    QByteArrayData data[14];
-    char stringdata0[223];
+    QByteArrayData data[20];
+    char stringdata0[291];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,22 +37,30 @@ QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 16), // "Set_LED_GREEN_ON"
 QT_MOC_LITERAL(4, 44, 15), // "Set_LED_BLUE_ON"
 QT_MOC_LITERAL(5, 60, 23), // "Request_Distance_Update"
-QT_MOC_LITERAL(6, 84, 19), // "on_btn_red1_clicked"
-QT_MOC_LITERAL(7, 104, 19), // "on_btn_blue_clicked"
-QT_MOC_LITERAL(8, 124, 20), // "on_btn_green_clicked"
-QT_MOC_LITERAL(9, 145, 27), // "on_tabWidget_currentChanged"
-QT_MOC_LITERAL(10, 173, 5), // "index"
-QT_MOC_LITERAL(11, 179, 18), // "Update_DistancesUI"
-QT_MOC_LITERAL(12, 198, 8), // "uint16_t"
-QT_MOC_LITERAL(13, 207, 15) // "Distance_Update"
+QT_MOC_LITERAL(6, 84, 23), // "Request_Position_Update"
+QT_MOC_LITERAL(7, 108, 19), // "on_btn_red1_clicked"
+QT_MOC_LITERAL(8, 128, 19), // "on_btn_blue_clicked"
+QT_MOC_LITERAL(9, 148, 20), // "on_btn_green_clicked"
+QT_MOC_LITERAL(10, 169, 27), // "on_tabWidget_currentChanged"
+QT_MOC_LITERAL(11, 197, 5), // "index"
+QT_MOC_LITERAL(12, 203, 18), // "Update_DistancesUI"
+QT_MOC_LITERAL(13, 222, 8), // "uint16_t"
+QT_MOC_LITERAL(14, 231, 15), // "Distance_Update"
+QT_MOC_LITERAL(15, 247, 15), // "Position_Update"
+QT_MOC_LITERAL(16, 263, 17), // "Update_PositionUI"
+QT_MOC_LITERAL(17, 281, 1), // "x"
+QT_MOC_LITERAL(18, 283, 1), // "y"
+QT_MOC_LITERAL(19, 285, 5) // "theta"
 
     },
     "TestWindow\0Set_LED_RED_ON\0\0Set_LED_GREEN_ON\0"
     "Set_LED_BLUE_ON\0Request_Distance_Update\0"
-    "on_btn_red1_clicked\0on_btn_blue_clicked\0"
-    "on_btn_green_clicked\0on_tabWidget_currentChanged\0"
-    "index\0Update_DistancesUI\0uint16_t\0"
-    "Distance_Update"
+    "Request_Position_Update\0on_btn_red1_clicked\0"
+    "on_btn_blue_clicked\0on_btn_green_clicked\0"
+    "on_tabWidget_currentChanged\0index\0"
+    "Update_DistancesUI\0uint16_t\0Distance_Update\0"
+    "Position_Update\0Update_PositionUI\0x\0"
+    "y\0theta"
 };
 #undef QT_MOC_LITERAL
 
@@ -62,28 +70,32 @@ static const uint qt_meta_data_TestWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   64,    2, 0x06 /* Public */,
-       3,    0,   65,    2, 0x06 /* Public */,
-       4,    0,   66,    2, 0x06 /* Public */,
-       5,    0,   67,    2, 0x06 /* Public */,
+       1,    0,   79,    2, 0x06 /* Public */,
+       3,    0,   80,    2, 0x06 /* Public */,
+       4,    0,   81,    2, 0x06 /* Public */,
+       5,    0,   82,    2, 0x06 /* Public */,
+       6,    0,   83,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   68,    2, 0x08 /* Private */,
-       7,    0,   69,    2, 0x08 /* Private */,
-       8,    0,   70,    2, 0x08 /* Private */,
-       9,    1,   71,    2, 0x08 /* Private */,
-      11,    4,   74,    2, 0x0a /* Public */,
-      13,    0,   83,    2, 0x0a /* Public */,
+       7,    0,   84,    2, 0x08 /* Private */,
+       8,    0,   85,    2, 0x08 /* Private */,
+       9,    0,   86,    2, 0x08 /* Private */,
+      10,    1,   87,    2, 0x08 /* Private */,
+      12,    4,   90,    2, 0x0a /* Public */,
+      14,    0,   99,    2, 0x0a /* Public */,
+      15,    0,  100,    2, 0x0a /* Public */,
+      16,    3,  101,    2, 0x0a /* Public */,
 
  // signals: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -93,9 +105,11 @@ static const uint qt_meta_data_TestWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   10,
-    QMetaType::Void, 0x80000000 | 12, 0x80000000 | 12, 0x80000000 | 12, 0x80000000 | 12,    2,    2,    2,    2,
+    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 13, 0x80000000 | 13, 0x80000000 | 13,    2,    2,    2,    2,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 13, 0x80000000 | 13,   17,   18,   19,
 
        0        // eod
 };
@@ -110,12 +124,15 @@ void TestWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->Set_LED_GREEN_ON(); break;
         case 2: _t->Set_LED_BLUE_ON(); break;
         case 3: _t->Request_Distance_Update(); break;
-        case 4: _t->on_btn_red1_clicked(); break;
-        case 5: _t->on_btn_blue_clicked(); break;
-        case 6: _t->on_btn_green_clicked(); break;
-        case 7: _t->on_tabWidget_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->Update_DistancesUI((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4]))); break;
-        case 9: _t->Distance_Update(); break;
+        case 4: _t->Request_Position_Update(); break;
+        case 5: _t->on_btn_red1_clicked(); break;
+        case 6: _t->on_btn_blue_clicked(); break;
+        case 7: _t->on_btn_green_clicked(); break;
+        case 8: _t->on_tabWidget_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->Update_DistancesUI((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4]))); break;
+        case 10: _t->Distance_Update(); break;
+        case 11: _t->Position_Update(); break;
+        case 12: _t->Update_PositionUI((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -148,6 +165,13 @@ void TestWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 return;
             }
         }
+        {
+            typedef void (TestWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&TestWindow::Request_Position_Update)) {
+                *result = 4;
+                return;
+            }
+        }
     }
 }
 
@@ -176,13 +200,13 @@ int TestWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 13;
     }
     return _id;
 }
@@ -209,6 +233,12 @@ void TestWindow::Set_LED_BLUE_ON()
 void TestWindow::Request_Distance_Update()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void TestWindow::Request_Position_Update()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

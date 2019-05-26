@@ -38,6 +38,9 @@ public:
     QPushButton *btn_connect_stm32;
     QLabel *lbl_status_connexion_st;
     QPushButton *btn_exit;
+    QPushButton *btn_close;
+    QLabel *label_2;
+    QLabel *label_3;
 
     void setupUi(QMainWindow *SettingsWindow)
     {
@@ -92,7 +95,7 @@ public:
 
         formLayoutWidget = new QWidget(centralwidget);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
-        formLayoutWidget->setGeometry(QRect(10, 60, 410, 251));
+        formLayoutWidget->setGeometry(QRect(10, 60, 410, 121));
         formLayout_3 = new QFormLayout(formLayoutWidget);
         formLayout_3->setObjectName(QStringLiteral("formLayout_3"));
         formLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -109,11 +112,22 @@ public:
 
         btn_exit = new QPushButton(centralwidget);
         btn_exit->setObjectName(QStringLiteral("btn_exit"));
-        btn_exit->setGeometry(QRect(420, 270, 60, 50));
+        btn_exit->setGeometry(QRect(415, 270, 60, 50));
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/new/icon/images/baseline_power_settings_new_black_48dp.png"), QSize(), QIcon::Normal, QIcon::Off);
         btn_exit->setIcon(icon3);
         btn_exit->setIconSize(QSize(48, 48));
+        btn_close = new QPushButton(centralwidget);
+        btn_close->setObjectName(QStringLiteral("btn_close"));
+        btn_close->setGeometry(QRect(0, 270, 60, 50));
+        btn_close->setIcon(icon3);
+        btn_close->setIconSize(QSize(48, 48));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(410, 250, 67, 17));
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(0, 250, 67, 17));
         SettingsWindow->setCentralWidget(centralwidget);
 
         retranslateUi(SettingsWindow);
@@ -131,6 +145,9 @@ public:
         btn_connect_stm32->setText(QApplication::translate("SettingsWindow", "Connect STM32", nullptr));
         lbl_status_connexion_st->setText(QString());
         btn_exit->setText(QString());
+        btn_close->setText(QString());
+        label_2->setText(QApplication::translate("SettingsWindow", "shutdown", nullptr));
+        label_3->setText(QApplication::translate("SettingsWindow", "Close", nullptr));
     } // retranslateUi
 
 };

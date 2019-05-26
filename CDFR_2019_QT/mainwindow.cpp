@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+
     connect(ui->btn_info, SIGNAL(clicked(bool)), this, SLOT(openInfoWindow()));
     connect(ui->btn_settings, SIGNAL(clicked(bool)), this, SLOT(openSettingsWindow()));
     connect(ui->btn_test, SIGNAL(clicked(bool)), this, SLOT(openTestWindow()));
@@ -26,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
    connect(tcp_thread, SIGNAL(Update_LED(uint8_t, uint8_t, uint8_t)),Info_wind,SLOT(Update_LED(uint8_t,uint8_t,uint8_t)));
    connect(tcp_thread, SIGNAL(Update_Distance(uint16_t,uint16_t,uint16_t,uint16_t)),Test_wind,SLOT(Update_DistancesUI(uint16_t,uint16_t,uint16_t,uint16_t)));
+   connect(tcp_thread, SIGNAL(Update_Position(uint16_t,uint16_t,uint16_t)),Test_wind,SLOT(Update_PositionUI(uint16_t,uint16_t,uint16_t)));
+
+
 
    // signal / slots connexion that are called from differents windows
    // TEST Windows
@@ -35,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
    connect(Test_wind, SIGNAL(Request_Distance_Update()),tcp_thread,SLOT(F_Get_Distances()));
 
+   connect(Test_wind, SIGNAL(Request_Position_Update()),tcp_thread,SLOT(F_Get_Position()));
+
    connect(tcp_thread, SIGNAL(Update_StatusConnexionSTM32(uint8_t)),Settings_wind,SLOT(update_statusConnexionST(uint8_t)));
    connect(Settings_wind, SIGNAL(Signal_reconnectST()),tcp_thread,SLOT(F_ReconnectTCP()));
 
@@ -42,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
    connect(tcp_thread, SIGNAL(Update_Tirette(uint16_t)),Game_wind,SLOT(F_UpdateTirette(uint16_t)));
 
 
+   connect(Game_wind, SIGNAL(F_RequestAddWayPoint(int16_t, int16_t, int16_t)), tcp_thread,SLOT(F_Add_Waypoint(int16_t, int16_t, int16_t)));
+   connect(tcp_thread, SIGNAL(Update_AddWayPoints(uint16_t)),Game_wind,SLOT(F_ManageAdditionWayPoints(uint16_t)));
 }
 
 MainWindow::~MainWindow()

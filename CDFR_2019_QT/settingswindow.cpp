@@ -41,3 +41,9 @@ void SettingsWindow::on_btn_connect_stm32_clicked()
 {
     emit(Signal_reconnectST());
 }
+
+void SettingsWindow::on_btn_close_clicked()
+{
+    emit(Signal_quit_app());
+    this->close();
+}

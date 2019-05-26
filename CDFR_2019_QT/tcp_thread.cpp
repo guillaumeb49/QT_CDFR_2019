@@ -201,33 +201,36 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
     list_answer.append(s_cmd_answer);
 
     qDebug() << "s_cmd_answer.code_retour = " << s_cmd_answer.code_retour ;
+    tcp_command last_cmd_send_fromlist =  list_cmd.last();
+
+
 
 
     if(s_cmd_answer.code_retour != STATUS_OK)
     {
         qDebug() << "[TCP Socket] Erreur last CMD \r\n";
         qDebug() << "[TCP Socket] Last CMD sent :  \r\n";
-        qDebug() << "ID : " << last_cmd_sent.id
-                  << "\r\n NB octets : " << last_cmd_sent.nb_octet
-                  << "\r\n CMD : " <<last_cmd_sent.cmd
-                  << "\r\n NB Params : " <<last_cmd_sent.nb_param
-                  << "\r\n Param[0] : " <<last_cmd_sent.params[0]
-                  << "\r\n Param[1] : " <<last_cmd_sent.params[1]
-                  << "\r\n Param[2] : " <<last_cmd_sent.params[2]
-                  << "\r\n Param[3] : " <<last_cmd_sent.params[3];
+        qDebug() << "ID : " << last_cmd_send_fromlist.id
+                  << "\r\n NB octets : " << last_cmd_send_fromlist.nb_octet
+                  << "\r\n CMD : " <<last_cmd_send_fromlist.cmd
+                  << "\r\n NB Params : " <<last_cmd_send_fromlist.nb_param
+                  << "\r\n Param[0] : " <<last_cmd_send_fromlist.params[0]
+                  << "\r\n Param[1] : " <<last_cmd_send_fromlist.params[1]
+                  << "\r\n Param[2] : " <<last_cmd_send_fromlist.params[2]
+                  << "\r\n Param[3] : " <<last_cmd_send_fromlist.params[3];
     }
     else // command generated a STATUS_OK response code
     {
         qDebug() << "[TCP Socket] Last CMD OK !\r\n";
         qDebug() << "[TCP Socket] Last CMD sent :  \r\n";
-        qDebug() << "ID : " << last_cmd_sent.id
-                  << "\r\n NB octets : " << last_cmd_sent.nb_octet
-                  << "\r\n CMD : " <<last_cmd_sent.cmd
-                  << "\r\n NB Params : " <<last_cmd_sent.nb_param
-                  << "\r\n Param[0] : " <<last_cmd_sent.params[0]
-                  << "\r\n Param[1] : " <<last_cmd_sent.params[1]
-                  << "\r\n Param[2] : " <<last_cmd_sent.params[2]
-                  << "\r\n Param[3] : " <<last_cmd_sent.params[3];
+        qDebug() << "ID : " << last_cmd_send_fromlist.id
+                  << "\r\n NB octets : " << last_cmd_send_fromlist.nb_octet
+                  << "\r\n CMD : " <<last_cmd_send_fromlist.cmd
+                  << "\r\n NB Params : " <<last_cmd_send_fromlist.nb_param
+                  << "\r\n Param[0] : " <<last_cmd_send_fromlist.params[0]
+                  << "\r\n Param[1] : " <<last_cmd_send_fromlist.params[1]
+                  << "\r\n Param[2] : " <<last_cmd_send_fromlist.params[2]
+                  << "\r\n Param[3] : " <<last_cmd_send_fromlist.params[3];
 
         qDebug() << "[TCP Socket] Answer :  \r\n";
         qDebug() << "ID : " << s_cmd_answer.id
@@ -262,15 +265,17 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             break;
 
             case CMD_GET_POSITION:
+             emit( Update_Position(s_cmd_answer.reponse[0], s_cmd_answer.reponse[1], s_cmd_answer.reponse[2]));
             break;
 
             case CMD_GO:
             break;
 
             case CMD_ADD_POINT:
+            emit(Update_AddWayPoints(s_cmd_answer.reponse[0])); // Send status of previous Waypoint adding
             break;
 
-            case CMD_REMOVE_POINT:
+            case CMD_RESET_LIST_WAYPOINTS:
             break;
 
             case CMD_GET_LIST_POINTS:
@@ -389,6 +394,48 @@ void TCP_Thread::F_Get_Distances()
     cmd_id++;
 }
 
+void TCP_Thread::F_Get_Position()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_GET_POSITION;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = 0;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Set_Position(int16_t x, int16_t y, int16_t theta)
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_SET_POSITION;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = x;
+    s_cmd_to_send.params[1] = y;
+    s_cmd_to_send.params[2] = theta;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
 
 void TCP_Thread::F_Get_Tirette()
 {
@@ -401,6 +448,69 @@ void TCP_Thread::F_Get_Tirette()
 
     // Get all sensors
     s_cmd_to_send.params[0] = 0;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Add_Waypoint(int16_t x, int16_t y,int16_t theta)
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_ADD_POINT;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = x;
+    s_cmd_to_send.params[1] = y;
+    s_cmd_to_send.params[2] = theta;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Reset_WayPointsList()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_RESET_LIST_WAYPOINTS;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = 0;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_EnableDisableReguation(uint16_t on)
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_GO;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = on;
     s_cmd_to_send.params[1] = 0;
     s_cmd_to_send.params[2] = 0;
     s_cmd_to_send.params[3] = 0;
@@ -465,7 +575,7 @@ void TCP_Thread::F_TCP_GetLED()
 {
     struct tcp_command s_cmd_to_send;
 
-    s_cmd_to_send.id = 0x01;
+    s_cmd_to_send.id = cmd_id;
     s_cmd_to_send.nb_octet = 15;
     s_cmd_to_send.cmd = CMD_GET_LED;
     s_cmd_to_send.nb_param = 0;
@@ -490,7 +600,7 @@ void TCP_Thread::F_TCP_GetDistances(uint16_t sensor_number)
 {
     struct tcp_command s_cmd_to_send;
 
-    s_cmd_to_send.id = 0x01;
+    s_cmd_to_send.id = cmd_id;
     s_cmd_to_send.nb_octet = 15;
     s_cmd_to_send.cmd = CMD_GET_DISTANCES;
     s_cmd_to_send.nb_param = 1;

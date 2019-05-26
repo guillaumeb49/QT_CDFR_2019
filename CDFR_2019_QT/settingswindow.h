@@ -26,6 +26,8 @@ public slots:
 private slots:
     void on_btn_connect_stm32_clicked();
 
+    void on_btn_close_clicked();
+
 private:
     Ui::SettingsWindow *ui;
 };

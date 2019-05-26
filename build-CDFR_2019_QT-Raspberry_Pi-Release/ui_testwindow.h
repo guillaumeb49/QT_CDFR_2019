@@ -64,6 +64,14 @@ public:
     QFrame *line_4;
     QLabel *label_9;
     QWidget *tab_3;
+    QWidget *horizontalLayoutWidget;
+    QGridLayout *gridLayout_3;
+    QLabel *label_12;
+    QLabel *label_11;
+    QLabel *lbl_x;
+    QLabel *label_13;
+    QLabel *lbl_y;
+    QLabel *lbl_theta;
     QWidget *tab_4;
     QWidget *tab_6;
     QPushButton *pushButton_5;
@@ -289,6 +297,58 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
+        horizontalLayoutWidget = new QWidget(tab_3);
+        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(10, 100, 391, 86));
+        gridLayout_3 = new QGridLayout(horizontalLayoutWidget);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        gridLayout_3->setContentsMargins(0, 0, 0, 0);
+        label_12 = new QLabel(horizontalLayoutWidget);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        QFont font1;
+        font1.setPointSize(16);
+        label_12->setFont(font1);
+        label_12->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(label_12, 0, 0, 1, 1);
+
+        label_11 = new QLabel(horizontalLayoutWidget);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setFont(font1);
+        label_11->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(label_11, 0, 1, 1, 1);
+
+        lbl_x = new QLabel(horizontalLayoutWidget);
+        lbl_x->setObjectName(QStringLiteral("lbl_x"));
+        QFont font2;
+        font2.setPointSize(14);
+        lbl_x->setFont(font2);
+        lbl_x->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(lbl_x, 1, 0, 1, 1);
+
+        label_13 = new QLabel(horizontalLayoutWidget);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setFont(font1);
+        label_13->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(label_13, 0, 2, 1, 1);
+
+        lbl_y = new QLabel(horizontalLayoutWidget);
+        lbl_y->setObjectName(QStringLiteral("lbl_y"));
+        lbl_y->setFont(font2);
+        lbl_y->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(lbl_y, 1, 1, 1, 1);
+
+        lbl_theta = new QLabel(horizontalLayoutWidget);
+        lbl_theta->setObjectName(QStringLiteral("lbl_theta"));
+        lbl_theta->setFont(font2);
+        lbl_theta->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(lbl_theta, 1, 2, 1, 1);
+
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -364,6 +424,12 @@ public:
         lbl_distance_sensor2->setText(QApplication::translate("TestWindow", "<html><head/><body><p align=\"center\">XXX cm</p></body></html>", nullptr));
         label_9->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TestWindow", "Distance", nullptr));
+        label_12->setText(QApplication::translate("TestWindow", "Y", nullptr));
+        label_11->setText(QApplication::translate("TestWindow", "X", nullptr));
+        lbl_x->setText(QApplication::translate("TestWindow", "0", nullptr));
+        label_13->setText(QApplication::translate("TestWindow", "Theta", nullptr));
+        lbl_y->setText(QApplication::translate("TestWindow", "0", nullptr));
+        lbl_theta->setText(QApplication::translate("TestWindow", "0", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("TestWindow", "Position", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("TestWindow", "Servo", nullptr));
         pushButton_5->setText(QApplication::translate("TestWindow", "Send Test", nullptr));

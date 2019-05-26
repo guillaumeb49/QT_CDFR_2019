@@ -22,7 +22,7 @@
 #define CMD_GET_POSITION	0x06
 #define CMD_GO				0x07
 #define CMD_ADD_POINT		0x08
-#define CMD_REMOVE_POINT	0x09
+#define CMD_RESET_LIST_WAYPOINTS	0x09
 #define CMD_GET_LIST_POINTS	0x0A
 
 #define CMD_GET_TIRETTE     0x0B
@@ -73,7 +73,7 @@ public:
     void F_TCP_GetDistances(uint16_t sensor_number);
 
     void F_TCP_SetPosition();
-    void F_TCP_GetPosition();
+
 
     void F_TCP_Go();
     void F_TCP_AddPoint();
@@ -102,19 +102,28 @@ signals:
 
     /**
      * @brief Update_Distance Update the Sensor distance value (get info from STM32)
-     * @param sensor_number Unique number of the sensor
-     * @param distance_mm Distance in mm
      */
     void Update_Distance(uint16_t,uint16_t,uint16_t,uint16_t);
+
+    /**
+     * @brief Update_Distance
+     */
+    void Update_Position(uint16_t,uint16_t,uint16_t);
+
+    /**
+     * @brief Update_Position
+     */
+    void Update_AddWayPoints(uint16_t);
+
 
     /**
      * @brief Update_Tirette Update the current state of the tirette : 1 tirette is armed, 0 tirette is out
      */
     void Update_Tirette(uint16_t);
 
-
-
     void Update_StatusConnexionSTM32(uint8_t);
+
+
 
 public slots:
     void F_ProcessDataReiceivedTCP(void);
@@ -124,7 +133,14 @@ public slots:
     void F_Set_LED_GREEN_ON();
     void F_Get_Distances();
 
+    void F_Get_Position();
+    void F_Set_Position(int16_t x, int16_t y,int16_t theta);
+
     void F_Get_Tirette();
+    void F_Add_Waypoint(int16_t x, int16_t y,int16_t theta);
+    void F_Reset_WayPointsList();
+
+    void F_EnableDisableReguation(uint16_t on);
 
 
     void F_ReconnectTCP();

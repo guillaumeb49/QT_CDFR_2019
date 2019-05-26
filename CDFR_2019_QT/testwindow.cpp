@@ -8,9 +8,11 @@ TestWindow::TestWindow(QWidget *parent) :
     ui->setupUi(this);
 
     timer_1_s = new QTimer(this);
+    timer_1_s_position = new QTimer(this);
 
     connect(ui->btn_main_menu, SIGNAL(clicked(bool)), this, SLOT(close()));
     connect(timer_1_s, SIGNAL(timeout()), this, SLOT(Distance_Update()));
+    connect(timer_1_s_position, SIGNAL(timeout()), this, SLOT(Position_Update()));
 }
 
 TestWindow::~TestWindow()
@@ -41,12 +43,22 @@ void TestWindow::on_tabWidget_currentChanged(int index)
     if(index == 1)
     {
         // launch the timer to udpdate the distance every seconds
+        timer_1_s_position->stop();
         timer_1_s->start(1000);
+
+    }
+    else if(index == 2)
+    {
+        // launch the timer to udpdate the distance every seconds
+        timer_1_s->stop();
+        timer_1_s_position->start(1000);
+
     }
     else
     {
         //else stop the timer
         timer_1_s->stop();
+        timer_1_s_position->stop();
     }
 }
 
@@ -63,6 +75,19 @@ void TestWindow::Distance_Update()
 {
     qDebug() << "INSIDE SLOT every 1s";
     emit(Request_Distance_Update());
+}
+
+void TestWindow::Position_Update()
+{
+    qDebug() << "INSIDE SLOT POSITION every 1s";
+    emit(Request_Position_Update());
+}
+
+void TestWindow::Update_PositionUI(uint16_t x, uint16_t y, uint16_t theta)
+{
+    ui->lbl_x->setText(QString::number((int16_t)x));
+    ui->lbl_y->setText(QString::number((int16_t)y));
+    ui->lbl_theta->setText(QString::number((int16_t)theta));
 }
 
 
