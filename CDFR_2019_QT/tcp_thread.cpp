@@ -11,7 +11,7 @@ TCP_Thread::TCP_Thread()
     // Connect Signals / Slots
     connect(socket,SIGNAL(readyRead()),this,SLOT(F_ProcessDataReiceivedTCP()));
     // Try to connect to the Host (STM32)
-    socket->connectToHost("192.168.1.21",7);
+    socket->connectToHost("192.168.2.21",7);
 
 
     if(socket->waitForConnected(20000))
@@ -246,6 +246,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
         // Process the answer
         switch (s_cmd_answer.cmd) {
             case CMD_INFO:
+                emit(Update_Info(s_cmd_answer.reponse[0],s_cmd_answer.reponse[1],s_cmd_answer.reponse[2],(uint8_t)(((s_cmd_answer.reponse[3]) >> 1) & 0xFF),(uint8_t)(s_cmd_answer.reponse[3])& 0x01)); // X, Y, Theta, Number points, Distance Warning, nb_waypoints
             break;
 
             case CMD_SET_LED:
@@ -262,6 +263,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             break;
 
             case CMD_SET_POSITION:
+                emit(Update_SetPositionOK());
             break;
 
             case CMD_GET_POSITION:
@@ -269,6 +271,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             break;
 
             case CMD_GO:
+                emit( Update_Enable_Disable_regulation(s_cmd_answer.reponse[0]));
             break;
 
             case CMD_ADD_POINT:
@@ -285,6 +288,9 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
                 // Trigger signal to update tirette state  on GUI
                 emit(Update_Tirette(s_cmd_answer.reponse[0]));
             break;
+
+        case CMD_MOVE_SERVO:
+        break;
 
             default:
             break;
@@ -321,6 +327,27 @@ void TCP_Thread::F_Set_LED_RED_ON()
 
 
     s_cmd_to_send.params[0] = 4;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_Set_Servo(uint8_t open)
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_MOVE_SERVO;
+    s_cmd_to_send.nb_param = 4;
+
+
+    s_cmd_to_send.params[0] = (uint16_t)open;
     s_cmd_to_send.params[1] = 0;
     s_cmd_to_send.params[2] = 0;
     s_cmd_to_send.params[3] = 0;
@@ -393,6 +420,28 @@ void TCP_Thread::F_Get_Distances()
     // Increment the command ID
     cmd_id++;
 }
+
+void TCP_Thread::F_Get_Info()
+{
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_INFO;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = 0;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
 
 void TCP_Thread::F_Get_Position()
 {
@@ -500,7 +549,43 @@ void TCP_Thread::F_Reset_WayPointsList()
     cmd_id++;
 }
 
-void TCP_Thread::F_EnableDisableReguation(uint16_t on)
+void TCP_Thread::F_EnableDisableReguation()
+{
+
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO !";
+    qDebug() << "Send GO ! ON = ";
+    struct tcp_command s_cmd_to_send;
+
+    s_cmd_to_send.id = cmd_id;
+    s_cmd_to_send.nb_octet = 15;
+    s_cmd_to_send.cmd = CMD_GO;
+    s_cmd_to_send.nb_param = 4;
+
+    // Get all sensors
+    s_cmd_to_send.params[0] = 1;
+    s_cmd_to_send.params[1] = 0;
+    s_cmd_to_send.params[2] = 0;
+    s_cmd_to_send.params[3] = 0;
+
+    F_SendDataTCP(s_cmd_to_send);
+
+    // Increment the command ID
+    cmd_id++;
+}
+
+void TCP_Thread::F_DisableReguation()
 {
     struct tcp_command s_cmd_to_send;
 
@@ -510,7 +595,7 @@ void TCP_Thread::F_EnableDisableReguation(uint16_t on)
     s_cmd_to_send.nb_param = 4;
 
     // Get all sensors
-    s_cmd_to_send.params[0] = on;
+    s_cmd_to_send.params[0] = 0;
     s_cmd_to_send.params[1] = 0;
     s_cmd_to_send.params[2] = 0;
     s_cmd_to_send.params[3] = 0;
@@ -525,7 +610,7 @@ void TCP_Thread::F_EnableDisableReguation(uint16_t on)
 void TCP_Thread::F_ReconnectTCP()
 {
     // Try to connect to the Host
-    socket->connectToHost("192.168.1.21",7);
+    socket->connectToHost("192.168.2.21",7);
 
 
     if(socket->waitForConnected(20000))

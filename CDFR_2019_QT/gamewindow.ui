@@ -189,7 +189,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="cb_color_selection">
          <item>
           <property name="text">
            <string>Yellow</string>
@@ -246,14 +246,14 @@
      <widget class="QLabel" name="lbl_stateMachine">
       <property name="geometry">
        <rect>
-        <x>13</x>
+        <x>3</x>
         <y>180</y>
-        <width>451</width>
+        <width>471</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>State Machine</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -287,30 +287,13 @@
      <widget class="QWidget" name="gridLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>300</x>
+        <x>270</x>
         <y>0</y>
-        <width>171</width>
-        <height>171</height>
+        <width>214</width>
+        <height>191</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_10">
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>X</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_19">
          <property name="font">
@@ -390,7 +373,69 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>X</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>#WayPoints</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="lbl_nb_waypoints">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="lbl_warning_distance">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>221</y>
+        <width>491</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_end_game">
@@ -413,10 +458,13 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string/>
+          <string>Atomes tableau périodique</string>
          </property>
          <property name="checkable">
-          <bool>false</bool>
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -505,7 +553,7 @@
        <item row="2" column="1">
         <widget class="QLabel" name="label_13">
          <property name="text">
-          <string>0</string>
+          <string>20</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -525,7 +573,7 @@
           </font>
          </property>
          <property name="text">
-          <string>0</string>
+          <string>20</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

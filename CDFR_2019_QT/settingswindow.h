@@ -28,6 +28,8 @@ private slots:
 
     void on_btn_close_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::SettingsWindow *ui;
 };

@@ -19,6 +19,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -37,6 +38,8 @@ public:
     QFormLayout *formLayout_3;
     QPushButton *btn_connect_stm32;
     QLabel *lbl_status_connexion_st;
+    QPushButton *pushButton;
+    QSpacerItem *verticalSpacer;
     QPushButton *btn_exit;
     QPushButton *btn_close;
     QLabel *label_2;
@@ -110,6 +113,15 @@ public:
 
         formLayout_3->setWidget(1, QFormLayout::FieldRole, lbl_status_connexion_st);
 
+        pushButton = new QPushButton(formLayoutWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        formLayout_3->setWidget(3, QFormLayout::FieldRole, pushButton);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout_3->setItem(2, QFormLayout::FieldRole, verticalSpacer);
+
         btn_exit = new QPushButton(centralwidget);
         btn_exit->setObjectName(QStringLiteral("btn_exit"));
         btn_exit->setGeometry(QRect(415, 270, 60, 50));
@@ -144,6 +156,7 @@ public:
         pushButton_13->setText(QString());
         btn_connect_stm32->setText(QApplication::translate("SettingsWindow", "Connect STM32", nullptr));
         lbl_status_connexion_st->setText(QString());
+        pushButton->setText(QApplication::translate("SettingsWindow", "Reset", nullptr));
         btn_exit->setText(QString());
         btn_close->setText(QString());
         label_2->setText(QApplication::translate("SettingsWindow", "shutdown", nullptr));

@@ -46,7 +46,7 @@ public:
     QLabel *label;
     QLabel *label_5;
     QLabel *label_6;
-    QComboBox *comboBox;
+    QComboBox *cb_color_selection;
     QLabel *label_7;
     QLabel *label_8;
     QLabel *label_9;
@@ -56,12 +56,15 @@ public:
     QLCDNumber *lcdNumber;
     QWidget *gridLayoutWidget_3;
     QGridLayout *gridLayout_2;
-    QLabel *label_10;
     QLabel *label_19;
     QLabel *label_16;
     QLabel *lbl_x;
     QLabel *lbl_y;
     QLabel *lbl_theta;
+    QLabel *label_10;
+    QLabel *label_20;
+    QLabel *lbl_nb_waypoints;
+    QLabel *lbl_warning_distance;
     QWidget *tab_end_game;
     QWidget *gridLayoutWidget_4;
     QGridLayout *gridLayout_3;
@@ -172,12 +175,12 @@ public:
 
         gridLayout->addWidget(label_6, 4, 1, 1, 1);
 
-        comboBox = new QComboBox(gridLayoutWidget);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName(QStringLiteral("comboBox"));
+        cb_color_selection = new QComboBox(gridLayoutWidget);
+        cb_color_selection->addItem(QString());
+        cb_color_selection->addItem(QString());
+        cb_color_selection->setObjectName(QStringLiteral("cb_color_selection"));
 
-        gridLayout->addWidget(comboBox, 0, 1, 1, 1);
+        gridLayout->addWidget(cb_color_selection, 0, 1, 1, 1);
 
         label_7 = new QLabel(gridLayoutWidget);
         label_7->setObjectName(QStringLiteral("label_7"));
@@ -202,7 +205,7 @@ public:
         tab_game->setObjectName(QStringLiteral("tab_game"));
         lbl_stateMachine = new QLabel(tab_game);
         lbl_stateMachine->setObjectName(QStringLiteral("lbl_stateMachine"));
-        lbl_stateMachine->setGeometry(QRect(13, 180, 451, 41));
+        lbl_stateMachine->setGeometry(QRect(3, 180, 471, 41));
         lbl_stateMachine->setAlignment(Qt::AlignCenter);
         lcdNumber = new QLCDNumber(tab_game);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
@@ -214,23 +217,16 @@ public:
         lcdNumber->setProperty("value", QVariant(90));
         gridLayoutWidget_3 = new QWidget(tab_game);
         gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
-        gridLayoutWidget_3->setGeometry(QRect(300, 0, 171, 171));
+        gridLayoutWidget_3->setGeometry(QRect(270, 0, 214, 191));
         gridLayout_2 = new QGridLayout(gridLayoutWidget_3);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_10 = new QLabel(gridLayoutWidget_3);
-        label_10->setObjectName(QStringLiteral("label_10"));
+        label_19 = new QLabel(gridLayoutWidget_3);
+        label_19->setObjectName(QStringLiteral("label_19"));
         QFont font;
         font.setPointSize(16);
         font.setBold(true);
         font.setWeight(75);
-        label_10->setFont(font);
-        label_10->setAlignment(Qt::AlignCenter);
-
-        gridLayout_2->addWidget(label_10, 0, 0, 1, 1);
-
-        label_19 = new QLabel(gridLayoutWidget_3);
-        label_19->setObjectName(QStringLiteral("label_19"));
         label_19->setFont(font);
         label_19->setAlignment(Qt::AlignCenter);
 
@@ -266,6 +262,30 @@ public:
 
         gridLayout_2->addWidget(lbl_theta, 2, 1, 1, 1);
 
+        label_10 = new QLabel(gridLayoutWidget_3);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        label_10->setFont(font);
+        label_10->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(label_10, 0, 0, 1, 1);
+
+        label_20 = new QLabel(gridLayoutWidget_3);
+        label_20->setObjectName(QStringLiteral("label_20"));
+        label_20->setFont(font);
+
+        gridLayout_2->addWidget(label_20, 3, 0, 1, 1);
+
+        lbl_nb_waypoints = new QLabel(gridLayoutWidget_3);
+        lbl_nb_waypoints->setObjectName(QStringLiteral("lbl_nb_waypoints"));
+        lbl_nb_waypoints->setFont(font1);
+
+        gridLayout_2->addWidget(lbl_nb_waypoints, 3, 1, 1, 1);
+
+        lbl_warning_distance = new QLabel(tab_game);
+        lbl_warning_distance->setObjectName(QStringLiteral("lbl_warning_distance"));
+        lbl_warning_distance->setGeometry(QRect(-10, 221, 491, 20));
+        lbl_warning_distance->setAutoFillBackground(false);
+        lbl_warning_distance->setStyleSheet(QStringLiteral(""));
         tabWidget->addTab(tab_game, QString());
         tab_end_game = new QWidget();
         tab_end_game->setObjectName(QStringLiteral("tab_end_game"));
@@ -278,7 +298,8 @@ public:
         checkBox_3 = new QCheckBox(gridLayoutWidget_4);
         checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
         checkBox_3->setEnabled(true);
-        checkBox_3->setCheckable(false);
+        checkBox_3->setCheckable(true);
+        checkBox_3->setChecked(true);
 
         gridLayout_3->addWidget(checkBox_3, 2, 0, 1, 1);
 
@@ -385,23 +406,26 @@ public:
         label->setText(QApplication::translate("GameWindow", "Choose the Color : ", nullptr));
         label_5->setText(QApplication::translate("GameWindow", "Capteurs", nullptr));
         label_6->setText(QApplication::translate("GameWindow", "0;0;0;0", nullptr));
-        comboBox->setItemText(0, QApplication::translate("GameWindow", "Yellow", nullptr));
-        comboBox->setItemText(1, QApplication::translate("GameWindow", "Purple", nullptr));
+        cb_color_selection->setItemText(0, QApplication::translate("GameWindow", "Yellow", nullptr));
+        cb_color_selection->setItemText(1, QApplication::translate("GameWindow", "Purple", nullptr));
 
         label_7->setText(QApplication::translate("GameWindow", "Ready!", nullptr));
         label_8->setText(QApplication::translate("GameWindow", "OK", nullptr));
         label_9->setText(QApplication::translate("GameWindow", "X: 0 Y: 0", nullptr));
         btn_start_game->setText(QApplication::translate("GameWindow", "Next", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_set_up), QApplication::translate("GameWindow", "Set-Up", nullptr));
-        lbl_stateMachine->setText(QApplication::translate("GameWindow", "TextLabel", nullptr));
-        label_10->setText(QApplication::translate("GameWindow", "X", nullptr));
+        lbl_stateMachine->setText(QApplication::translate("GameWindow", "State Machine", nullptr));
         label_19->setText(QApplication::translate("GameWindow", "Theta", nullptr));
         label_16->setText(QApplication::translate("GameWindow", "Y", nullptr));
         lbl_x->setText(QString());
         lbl_y->setText(QString());
         lbl_theta->setText(QString());
+        label_10->setText(QApplication::translate("GameWindow", "X", nullptr));
+        label_20->setText(QApplication::translate("GameWindow", "#WayPoints", nullptr));
+        lbl_nb_waypoints->setText(QString());
+        lbl_warning_distance->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_game), QApplication::translate("GameWindow", "Game!", nullptr));
-        checkBox_3->setText(QString());
+        checkBox_3->setText(QApplication::translate("GameWindow", "Atomes tableau p\303\251riodique", nullptr));
         label_11->setText(QApplication::translate("GameWindow", "Actions r\303\251alis\303\251es", nullptr));
         label_15->setText(QApplication::translate("GameWindow", "0", nullptr));
         checkBox_4->setText(QApplication::translate("GameWindow", "Lib\303\251rer Goldonium", nullptr));
@@ -409,8 +433,8 @@ public:
         checkBox->setText(QApplication::translate("GameWindow", "D\303\251marrer Exp\303\251rience", nullptr));
         label_12->setText(QApplication::translate("GameWindow", "0", nullptr));
         label_14->setText(QApplication::translate("GameWindow", "0", nullptr));
-        label_13->setText(QApplication::translate("GameWindow", "0", nullptr));
-        lbl_points_tot->setText(QApplication::translate("GameWindow", "0", nullptr));
+        label_13->setText(QApplication::translate("GameWindow", "20", nullptr));
+        lbl_points_tot->setText(QApplication::translate("GameWindow", "20", nullptr));
         label_17->setText(QApplication::translate("GameWindow", "TOTAL ", nullptr));
         label_18->setText(QApplication::translate("GameWindow", "Points", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_end_game), QApplication::translate("GameWindow", "End of Game", nullptr));

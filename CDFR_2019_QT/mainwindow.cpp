@@ -50,6 +50,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
    connect(Game_wind, SIGNAL(F_RequestAddWayPoint(int16_t, int16_t, int16_t)), tcp_thread,SLOT(F_Add_Waypoint(int16_t, int16_t, int16_t)));
    connect(tcp_thread, SIGNAL(Update_AddWayPoints(uint16_t)),Game_wind,SLOT(F_ManageAdditionWayPoints(uint16_t)));
+
+   connect(Game_wind, SIGNAL(F_RequestUpdateGetPosition()), tcp_thread,SLOT(F_Get_Position()));
+   connect(tcp_thread, SIGNAL(Update_Position(uint16_t,uint16_t,uint16_t)),Game_wind,SLOT(F_UpdatePosition(uint16_t,uint16_t,uint16_t)));
+
+
+   connect(Game_wind, SIGNAL(F_RequestSetPosition(int16_t, int16_t, int16_t)), tcp_thread,SLOT(F_Set_Position(int16_t, int16_t,int16_t)));
+   connect(tcp_thread, SIGNAL(Update_SetPositionOK()), Game_wind,SLOT(F_UpdateSetPosition()));
+
+   connect(Game_wind, SIGNAL(F_RequestUpdateGetInfo()), tcp_thread,SLOT(F_Get_Info()));
+   connect(tcp_thread, SIGNAL(Update_Info(uint16_t,uint16_t,uint16_t,uint8_t,uint8_t)), Game_wind,SLOT(F_UpdateGetInfo(uint16_t, uint16_t, uint16_t, uint8_t, uint8_t)));
+
+   connect(Game_wind, SIGNAL(F_Request_Go()), tcp_thread,SLOT(F_EnableDisableReguation()));
+   connect(tcp_thread, SIGNAL(Update_Enable_Disable_regulation(uint16_t)), Game_wind,SLOT(F_UpdateEnable_DisableAuto(uint16_t)));
+
+   connect(Game_wind, SIGNAL(F_Request_Stop()), tcp_thread,SLOT(F_DisableReguation()));
+   connect(Game_wind, SIGNAL(F_RequestServo(uint8_t)), tcp_thread,SLOT(F_Set_Servo(uint8_t)));
+
 }
 
 MainWindow::~MainWindow()

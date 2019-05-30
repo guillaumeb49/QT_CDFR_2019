@@ -18,8 +18,6 @@ InfoWindow::InfoWindow(QWidget *parent) :
     }
 
 
-
-
 }
 
 InfoWindow::~InfoWindow()

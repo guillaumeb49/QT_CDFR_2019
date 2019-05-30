@@ -47,3 +47,12 @@ void SettingsWindow::on_btn_close_clicked()
     emit(Signal_quit_app());
     this->close();
 }
+
+void SettingsWindow::on_pushButton_clicked()
+{
+    QProcess process;
+    process.startDetached("./CDFR_2019_QT");
+
+    emit(Signal_quit_app());
+    this->close();
+}

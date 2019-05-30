@@ -26,7 +26,7 @@
 #define CMD_GET_LIST_POINTS	0x0A
 
 #define CMD_GET_TIRETTE     0x0B
-
+#define CMD_MOVE_SERVO     	0x0C
 
 #define STATUS_OK			0x00
 #define STATUS_UNKNOWN_CMD	0x01
@@ -101,6 +101,12 @@ signals:
     void Update_LED(uint8_t, uint8_t, uint8_t);
 
     /**
+     * @brief Update_Distance
+     */
+    void Update_Info(uint16_t,uint16_t,uint16_t,uint8_t,uint8_t);
+
+
+    /**
      * @brief Update_Distance Update the Sensor distance value (get info from STM32)
      */
     void Update_Distance(uint16_t,uint16_t,uint16_t,uint16_t);
@@ -109,6 +115,10 @@ signals:
      * @brief Update_Distance
      */
     void Update_Position(uint16_t,uint16_t,uint16_t);
+
+
+    void Update_Enable_Disable_regulation(uint16_t);
+
 
     /**
      * @brief Update_Position
@@ -121,6 +131,9 @@ signals:
      */
     void Update_Tirette(uint16_t);
 
+    void Update_SetPositionOK();
+
+
     void Update_StatusConnexionSTM32(uint8_t);
 
 
@@ -132,6 +145,7 @@ public slots:
     void F_Set_LED_BLUE_ON();
     void F_Set_LED_GREEN_ON();
     void F_Get_Distances();
+    void F_Set_Servo(uint8_t open);
 
     void F_Get_Position();
     void F_Set_Position(int16_t x, int16_t y,int16_t theta);
@@ -140,8 +154,10 @@ public slots:
     void F_Add_Waypoint(int16_t x, int16_t y,int16_t theta);
     void F_Reset_WayPointsList();
 
-    void F_EnableDisableReguation(uint16_t on);
+    void F_EnableDisableReguation();
+    void F_DisableReguation();
 
+    void F_Get_Info();
 
     void F_ReconnectTCP();
 
