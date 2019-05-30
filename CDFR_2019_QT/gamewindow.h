@@ -32,6 +32,10 @@ public:
 
 private:
     void AddWaypointToList(int16_t x,int16_t y,int16_t theta);
+    void F_Init_S51(void);
+    void F_Init_S52(void);
+    void F_Init_S53(void);
+    void F_Init_S54(void);
 
 private slots:
     void on_btn_start_game_clicked();
@@ -51,6 +55,7 @@ public slots:
      void F_ManageAdditionWayPoints(uint16_t state);
 
      void F_UpdateEnable_DisableAuto(uint16_t);
+     void F_UpdateResetListWayPoints();
 
 signals:
     void F_RequestUpdateTirette();
@@ -63,6 +68,7 @@ signals:
 
     void F_RequestAddWayPoint(int16_t x, int16_t y, int16_t theta);
 
+
     void F_TransistionUserReadyOK();
     void F_TransistionRestartOK();
 
@@ -71,14 +77,23 @@ signals:
     void F_TransistionTiretteOK();
     void F_TransistionStartWayPoints_OK();
     void F_TransistionStartGame_and_Go_OK();
+    void F_TransistionToS51();
+    void F_TransistionToS52();
+    void F_TransistionToS53();
+    void F_TransistionToS54();
+
+    void F_TransistionToManageStrategyOK();
 
     void F_Request_Go();
     void F_Request_Stop();
+    void F_RequestResetListWayPoints();
 
     void F_RequestServo(uint8_t);
 
     void F_TransistionEndOfGame_OK();
     void F_TransistionDisplayResults_OK();
+
+
 
 private:
     Ui::GameWindow *ui;
@@ -106,6 +121,15 @@ private:
     bool pince_out;
     uint16_t timer_pince_out;
     bool color_yellow;
+
+    uint8_t current_state;
+     bool stop_ok;
+     bool reset_ok;
+     bool new_list_ok;
+     bool start_ok;
+     uint8_t i_state_s5x ;
+
+
 
 };
 

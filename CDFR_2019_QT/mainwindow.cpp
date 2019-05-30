@@ -67,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent) :
    connect(Game_wind, SIGNAL(F_Request_Stop()), tcp_thread,SLOT(F_DisableReguation()));
    connect(Game_wind, SIGNAL(F_RequestServo(uint8_t)), tcp_thread,SLOT(F_Set_Servo(uint8_t)));
 
+  connect(Game_wind, SIGNAL( F_RequestResetListWayPoints()), tcp_thread,SLOT(F_Reset_WayPointsList()));
+  connect(tcp_thread, SIGNAL( Update_ResetListWayPoints()), Game_wind,SLOT(F_UpdateResetListWayPoints()));
+
+
 }
 
 MainWindow::~MainWindow()

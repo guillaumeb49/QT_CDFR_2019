@@ -125,6 +125,7 @@ signals:
      */
     void Update_AddWayPoints(uint16_t);
 
+    void Update_ResetListWayPoints();
 
     /**
      * @brief Update_Tirette Update the current state of the tirette : 1 tirette is armed, 0 tirette is out

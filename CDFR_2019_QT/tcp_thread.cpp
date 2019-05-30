@@ -14,7 +14,7 @@ TCP_Thread::TCP_Thread()
     socket->connectToHost("192.168.2.21",7);
 
 
-    if(socket->waitForConnected(20000))
+    if(socket->waitForConnected(5000))
     {
         qDebug() << "[TCP Socket] Connected to STM32!";
         terminated = false;
@@ -190,7 +190,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
 
     received_data = socket->readAll();
 
-    qDebug() << "received ("<<received_data.length()<<")\r\n" << received_data << "\r\n";
+  //  qDebug() << "received ("<<received_data.length()<<")\r\n" << received_data << "\r\n";
     for(uint8_t i = 0;i<20;i++)
     {
         array[i] = received_data.at(i);
@@ -200,7 +200,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
 
     list_answer.append(s_cmd_answer);
 
-    qDebug() << "s_cmd_answer.code_retour = " << s_cmd_answer.code_retour ;
+ //   qDebug() << "s_cmd_answer.code_retour = " << s_cmd_answer.code_retour ;
     tcp_command last_cmd_send_fromlist =  list_cmd.last();
 
 
@@ -208,7 +208,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
 
     if(s_cmd_answer.code_retour != STATUS_OK)
     {
-        qDebug() << "[TCP Socket] Erreur last CMD \r\n";
+       qDebug() << "[TCP Socket] Erreur last CMD \r\n";
         qDebug() << "[TCP Socket] Last CMD sent :  \r\n";
         qDebug() << "ID : " << last_cmd_send_fromlist.id
                   << "\r\n NB octets : " << last_cmd_send_fromlist.nb_octet
@@ -221,7 +221,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
     }
     else // command generated a STATUS_OK response code
     {
-        qDebug() << "[TCP Socket] Last CMD OK !\r\n";
+     /*   qDebug() << "[TCP Socket] Last CMD OK !\r\n";
         qDebug() << "[TCP Socket] Last CMD sent :  \r\n";
         qDebug() << "ID : " << last_cmd_send_fromlist.id
                   << "\r\n NB octets : " << last_cmd_send_fromlist.nb_octet
@@ -240,7 +240,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
                   << "\r\n Answer[1] : " <<s_cmd_answer.reponse[1]
                   << "\r\n Answer[2] : " <<s_cmd_answer.reponse[2]
                   << "\r\n Answer[3] : " <<s_cmd_answer.reponse[3];
-
+*/
 
 
         // Process the answer
@@ -279,6 +279,7 @@ void TCP_Thread::F_ProcessDataReiceivedTCP()
             break;
 
             case CMD_RESET_LIST_WAYPOINTS:
+            emit(Update_ResetListWayPoints());
             break;
 
             case CMD_GET_LIST_POINTS:
@@ -532,6 +533,13 @@ void TCP_Thread::F_Reset_WayPointsList()
 {
     struct tcp_command s_cmd_to_send;
 
+    qDebug() <<"RESET LIST" ;
+    qDebug() <<"RESET LIST" ;
+    qDebug() <<"RESET LIST" ;
+    qDebug() <<"RESET LIST" ;
+    qDebug() <<"RESET LIST" ;
+    qDebug() <<"RESET LIST\r\n" ;
+
     s_cmd_to_send.id = cmd_id;
     s_cmd_to_send.nb_octet = 15;
     s_cmd_to_send.cmd = CMD_RESET_LIST_WAYPOINTS;
@@ -613,7 +621,7 @@ void TCP_Thread::F_ReconnectTCP()
     socket->connectToHost("192.168.2.21",7);
 
 
-    if(socket->waitForConnected(20000))
+    if(socket->waitForConnected(5000))
     {
         qDebug() << "[TCP Socket] Connected to STM32!";
         terminated = false;

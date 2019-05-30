@@ -8,7 +8,7 @@ GameWindow::GameWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->btn_main_menu, SIGNAL(clicked(bool)), this, SLOT(close()));
 
-    time_game_sec = 90;
+    time_game_sec = 100;
 
     initial_position.x      = 0;
     initial_position.y      = 0;
@@ -20,6 +20,13 @@ GameWindow::GameWindow(QWidget *parent) :
     counter_S5 = 0;
     pince_out = false;
     timer_pince_out = 0;
+    current_state = 1;
+
+    stop_ok = false;
+    reset_ok = false;
+    new_list_ok = false;
+    start_ok = false;
+    i_state_s5x = 0;
 
     state_tirette = false;
     pendingTCP = false;
@@ -60,6 +67,29 @@ GameWindow::GameWindow(QWidget *parent) :
     s5->assignProperty(ui->lbl_stateMachine, "text", "Manage Strategy (S5)");
     s5->assignProperty(state_machine, "state", 5);
 
+
+    // Executer tache 1
+    QState *s51 = new QState();
+    s51->assignProperty(ui->lbl_stateMachine, "text", "Recuperer Palet 1 (S51)");
+    s51->assignProperty(state_machine, "state", 51);
+
+
+    // Executer tache 2
+    QState *s52 = new QState();
+    s52->assignProperty(ui->lbl_stateMachine, "text", "Recuperer Palet Zone1 (S52)");
+    s52->assignProperty(state_machine, "state", 52);
+
+    // Executer tache 3
+    QState *s53 = new QState();
+    s53->assignProperty(ui->lbl_stateMachine, "text", "Recuperer Palets Zone2 (S53)");
+    s53->assignProperty(state_machine, "state", 53);
+
+    // Executer tache 4
+    QState *s54 = new QState();
+    s54->assignProperty(ui->lbl_stateMachine, "text", "Recuperer Palets Zone1 (S54)");
+    s54->assignProperty(state_machine, "state", 54);
+
+
     // Manage End Of Game (Disable all actuators)
     QState *s6 = new QState();
     s6->assignProperty(ui->lbl_stateMachine, "text", "Manage End Of Game(S6)");
@@ -83,7 +113,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
      // Wait for Position Set
      state_machine->addState(s1);
-     s1->addTransition(this, SIGNAL(F_TransitionSetPosition_OK()), s2);
+     s1->addTransition(this, SIGNAL(F_TransitionSetPosition_OK()), s3);
 
      // Wait for WayPoints Loaded
      state_machine->addState(s2);
@@ -93,10 +123,31 @@ GameWindow::GameWindow(QWidget *parent) :
      s3->addTransition(this, SIGNAL(F_TransistionTiretteOK()), s4);
 
      state_machine->addState(s4);
-     s4->addTransition(this, SIGNAL(F_TransistionStartGame_and_Go_OK()), s5);
+     s4->addTransition(this, SIGNAL(F_TransistionStartGame_and_Go_OK()), s51);
 
      state_machine->addState(s5);
      s5->addTransition(this, SIGNAL(F_TransistionEndOfGame_OK()), s6);  // if End Of Game
+     s5->addTransition(this, SIGNAL(F_TransistionToS51()), s51);  // Task 1
+     s5->addTransition(this, SIGNAL(F_TransistionToS52()), s52);  // Task 2
+     s5->addTransition(this, SIGNAL(F_TransistionToS53()), s53);  // Task 3
+     s5->addTransition(this, SIGNAL(F_TransistionToS54()), s54);  // Task 4
+
+
+     state_machine->addState(s51);
+     s51->addTransition(this, SIGNAL(F_TransistionToManageStrategyOK()), s5);
+     s51->addTransition(this, SIGNAL(F_TransistionEndOfGame_OK()), s6);             // End of Game
+
+     state_machine->addState(s52);
+     s52->addTransition(this, SIGNAL(F_TransistionToManageStrategyOK()), s5);
+     s52->addTransition(this, SIGNAL(F_TransistionEndOfGame_OK()), s6);             // End of Game
+
+     state_machine->addState(s53);
+     s53->addTransition(this, SIGNAL(F_TransistionToManageStrategyOK()), s5);
+     s53->addTransition(this, SIGNAL(F_TransistionEndOfGame_OK()), s6);             // End of Game
+
+     state_machine->addState(s54);
+     s54->addTransition(this, SIGNAL(F_TransistionToManageStrategyOK()), s5);
+     s54->addTransition(this, SIGNAL(F_TransistionEndOfGame_OK()), s6);             // End of Game
 
      state_machine->addState(s6);
      s6->addTransition(this, SIGNAL(F_TransistionDisplayResults_OK()), s7);  // Once actuators are off
@@ -119,9 +170,6 @@ GameWindow::GameWindow(QWidget *parent) :
     timer_game->setInterval(1000);  //1sec
 
     connect(timer_game, SIGNAL(timeout()), this, SLOT(F_UpdateTimer_game()));
-
-
-
 
 
 }
@@ -161,11 +209,11 @@ void GameWindow::on_btn_start_game_clicked()
         initial_position.teta   = 0;
 
         color_yellow = true;
-        AddWaypointToList(200, -727, 0);
+      /*  AddWaypointToList(200, -727, 0);
         AddWaypointToList(200, -1250, 0);
         AddWaypointToList(900, -1250, 0);
         AddWaypointToList(400, -850, 90);
-
+*/
 
     }
     else {
@@ -175,11 +223,12 @@ void GameWindow::on_btn_start_game_clicked()
         initial_position.teta   = 180;
 
         color_yellow = false;
-
+/*
         AddWaypointToList(2800, -727, 0);
         AddWaypointToList(2800, -1250, 0);
         AddWaypointToList(2300, -1250, 0);
         AddWaypointToList(2600, -850, 0);
+        */
     }
 
 
@@ -192,6 +241,7 @@ void GameWindow::on_btn_start_game_clicked()
 
 void GameWindow::ManageStateMachine()
 {
+
        switch(state_machine->property("state").toInt())
         {
             case 0: // Initial State
@@ -209,15 +259,15 @@ void GameWindow::ManageStateMachine()
             case 2: // Load WayPoints
                 pendingTCP = true;
 
+              /*  qDebug() << "Loading WayPoints!!!!";
                 qDebug() << "Loading WayPoints!!!!";
                 qDebug() << "Loading WayPoints!!!!";
                 qDebug() << "Loading WayPoints!!!!";
                 qDebug() << "Loading WayPoints!!!!";
                 qDebug() << "Loading WayPoints!!!!";
-                qDebug() << "Loading WayPoints!!!!";
-
+*/
                 // Start WayPoints transmission
-                if(waypoints_transmission_started == false)
+             /*   if(waypoints_transmission_started == false)
                 {
                     waypoints_transmission_started = true;
                     Localisation loc = list_WayPoints.first();   // get first point of the list
@@ -230,7 +280,7 @@ void GameWindow::ManageStateMachine()
                 {
                     // we can go to the next state
                     emit(F_TransistionStartWayPoints_OK());
-                }
+                }*/
 
                 break;
 
@@ -261,28 +311,67 @@ void GameWindow::ManageStateMachine()
                 break;
 
             case 5: // Go
-                qDebug() << "S5!!";
                 emit(F_RequestUpdateGetInfo()); // every 100ms request info from the robot
-                // Manage Waypoints (check if list of WayPoints is empty)
-                if(distance_warning)
+                i_state_s5x = 0;
+                if(distance_warning == true)
                 {
-                    counter_S5++;
+
+                    // If obstacle detected
+                    // Go to the next strategy
+                    switch(current_state)
+                    {
+                        // emit transition to go to the next state
+                        case 1:
+                                current_state = 1;
+                                qDebug() << "transition to S52";
+                            emit(F_TransistionToS52()); // Go to state S52
+
+                            break;
+
+                        case 2:
+                                current_state = 2;
+                                qDebug() << "transition to S53";
+                            emit(F_TransistionToS53()); // Go to state S53
+
+                            break;
+
+                        case 3:
+                                current_state = 3;
+                                qDebug() << "transition to S54";
+                            emit(F_TransistionToS54()); // Go to state S54
+
+                            break;
+
+                        case 4:
+                                current_state = 4;
+                                qDebug() << "transition to S51";
+                            emit(F_TransistionToS51());// Go to state S51
+
+                            break;
+                    }
+
                 }
-                else {
-                    counter_S5 = 0;
+                else if(nb_point_to_go == 0)
+                {
+                    // ouvrir le servo
                 }
 
 
-                /* Manage colisions (if distance < 30cm for 2 sec)
-                    // --> Get the current WayPoint IDcounter_S5
-                    // --> Delete all WayPoints
-                    // --> Get Position
-                    // --> Turn 180°
-                    // --> Move forward 5 cm (if possible)
-                    // Send a new list of Points
-                 */
-                // Send Go to Enable waypoints following
 
+            case 51: // Strategy
+                F_Init_S51();
+                break;
+
+            case 52: // Strategy
+                F_Init_S52();
+                break;
+
+            case 53: // Strategy
+                F_Init_S53();
+                break;
+
+            case 54: // Strategy
+                F_Init_S54();
                 break;
 
             case 6: // Manage End of Game
@@ -370,7 +459,7 @@ void GameWindow::F_UpdateGetInfo(uint16_t x, uint16_t y, uint16_t theta, uint8_t
     }
 
     // If there is no points
-    if(nb_points == 0)
+  /*  if(nb_points == 0)
     {
 
         if(pince_out== false)
@@ -384,7 +473,7 @@ void GameWindow::F_UpdateGetInfo(uint16_t x, uint16_t y, uint16_t theta, uint8_t
             pince_out = false;
 
 
-            // Send new points.
+      /*      // Send new points.
             if(waypoints_transmission_started == false)
             {
 
@@ -410,8 +499,9 @@ void GameWindow::F_UpdateGetInfo(uint16_t x, uint16_t y, uint16_t theta, uint8_t
                 Localisation loc = list_WayPoints.first();   // get first point of the list
                 emit(F_RequestAddWayPoint(loc.x, loc.y, loc.teta));
             }
-        }
-
+            */
+  /*      }
+*/
         if(pince_out == true)
         {
             timer_pince_out++;
@@ -419,7 +509,7 @@ void GameWindow::F_UpdateGetInfo(uint16_t x, uint16_t y, uint16_t theta, uint8_t
         else {
             timer_pince_out = 0;
         }
-    }
+    //}
 }
 
 void GameWindow::F_UpdateTirette(uint16_t state)
@@ -474,6 +564,8 @@ void GameWindow::F_ManageAdditionWayPoints(uint16_t state)
          qDebug() << "WayPoints list is empty!";
         // List is empty, we can go to the next state
         waypointsOK = true;
+        i_state_s5x++;  // next state
+
     }
     else {
         loc = list_WayPoints.first();   // get first point of the list
@@ -488,4 +580,289 @@ void GameWindow::F_ManageAdditionWayPoints(uint16_t state)
 void GameWindow::F_UpdateEnable_DisableAuto(uint16_t auto_on)
 {
     qDebug() << "SLOT _UpdateEnable_DisableAuto, auto = " << auto_on;
+    i_state_s5x++;  // next state
+}
+
+void GameWindow::F_UpdateResetListWayPoints()
+{
+    i_state_s5x++;  // next state
+}
+
+
+
+void GameWindow::F_Init_S51(void)
+{
+
+    // if first time in this case --> stop auto, reset list, send new list, start auto
+
+    switch (i_state_s5x)
+    {
+    case 0:  // send Stop
+        if(stop_ok == false)
+        {
+            qDebug() << "F_Request_Stop";
+             stop_ok = true;
+             emit(F_Request_Stop());
+        }
+         break;
+
+    case 1:  // send Reset List
+        if(reset_ok == false)
+        {
+            qDebug() << "F_RequestResetListWayPoints";
+             reset_ok = true;
+             emit(F_RequestResetListWayPoints());
+        }
+         break;
+
+    case 2: // Start to send New list
+        if(new_list_ok == false)
+        {
+            qDebug() << "F_RequestAddWayPoint";
+             new_list_ok = true;
+             list_WayPoints.resize(0);
+             if(color_yellow== true)
+             {
+                 AddWaypointToList(200, -727, 0);
+                 AddWaypointToList(200, -1250, 0);
+                 AddWaypointToList(900, -1250, 0);
+                 AddWaypointToList(400, -850, 90);
+             }
+             else {
+                 AddWaypointToList(2800, -727, 0);
+                 AddWaypointToList(2800, -1250, 0);
+                 AddWaypointToList(2300, -1250, 0);
+                 AddWaypointToList(2600, -850, 0);
+             }
+
+             Localisation loc = list_WayPoints.first();   // get first point of the list
+             emit(F_RequestAddWayPoint(loc.x, loc.y, loc.teta));
+
+             list_WayPoints.removeFirst();   // Remove the point just sent
+        }
+         break;
+
+    case 3: // Start Auto
+        if(start_ok == false)
+        {
+             qDebug() << "F_Request_Go";
+             start_ok = true;
+              emit(F_Request_Go());
+        }
+         break;
+
+    case 4: // Go to main Strategy State S5
+         i_state_s5x = 0;
+         qDebug() << "F_TransistionToManageStrategyOK";
+         emit(F_TransistionToManageStrategyOK());
+         break;
+    }
+}
+
+/**
+ * @brief GameWindow::F_Init_S52
+ * Initialize and Manage Strategy 2
+ */
+void GameWindow::F_Init_S52()
+{
+    switch (i_state_s5x)
+    {
+    case 0:  // send Stop
+        if(stop_ok == false)
+        {
+            qDebug() << "F_Request_Stop";
+             stop_ok = true;
+             emit(F_Request_Stop());
+        }
+         break;
+
+    case 1:  // send Reset List
+        if(reset_ok == false)
+        {
+            qDebug() << "F_RequestResetListWayPoints";
+             reset_ok = true;
+             emit(F_RequestResetListWayPoints());
+        }
+         break;
+
+    case 2: // Start to send New list
+        if(new_list_ok == false)
+        {
+            qDebug() << "F_RequestAddWayPoint";
+             new_list_ok = true;
+             list_WayPoints.resize(0);
+             if(color_yellow== true)
+             {
+                 AddWaypointToList(1000, -600, 0);
+                 AddWaypointToList(1400, -1100, 0);
+                 AddWaypointToList(400, -900, 0);
+             }
+             else {
+                 AddWaypointToList(2000, -600, 0);
+                 AddWaypointToList(1600, -1100, 0);
+                 AddWaypointToList(2600, -900, 0);
+             }
+
+             Localisation loc = list_WayPoints.first();   // get first point of the list
+             emit(F_RequestAddWayPoint(loc.x, loc.y, loc.teta));
+
+             list_WayPoints.removeFirst();   // Remove the point just sent
+        }
+         break;
+
+    case 3: // Start Auto
+        if(start_ok == false)
+        {
+             qDebug() << "F_Request_Go";
+             start_ok = true;
+              emit(F_Request_Go());
+        }
+         break;
+
+    case 4: // Go to main Strategy State S5
+         i_state_s5x = 0;
+         qDebug() << "F_TransistionToManageStrategyOK";
+         emit(F_TransistionToManageStrategyOK());
+         break;
+    }
+}
+
+
+/**
+ * @brief GameWindow::F_Init_S53
+ * Initialize and Manage Strategy 3
+ */
+void GameWindow::F_Init_S53()
+{
+    switch (i_state_s5x)
+    {
+    case 0:  // send Stop
+        if(stop_ok == false)
+        {
+            qDebug() << "F_Request_Stop";
+             stop_ok = true;
+             emit(F_Request_Stop());
+        }
+         break;
+
+    case 1:  // send Reset List
+        if(reset_ok == false)
+        {
+            qDebug() << "F_RequestResetListWayPoints";
+             reset_ok = true;
+             emit(F_RequestResetListWayPoints());
+        }
+         break;
+
+    case 2: // Start to send New list
+        if(new_list_ok == false)
+        {
+            qDebug() << "F_RequestAddWayPoint";
+             new_list_ok = true;
+             list_WayPoints.resize(0);
+             if(color_yellow== true)
+             {
+                 AddWaypointToList(2000, -600, 0);
+                 AddWaypointToList(2400, -1100, 0);
+                 AddWaypointToList(400, -900, 0);
+             }
+             else {
+                 AddWaypointToList(1000, -600, 0);
+                 AddWaypointToList(600, -1100, 0);
+                 AddWaypointToList(2600, -900, 0);
+             }
+
+             Localisation loc = list_WayPoints.first();   // get first point of the list
+             emit(F_RequestAddWayPoint(loc.x, loc.y, loc.teta));
+
+             list_WayPoints.removeFirst();   // Remove the point just sent
+        }
+         break;
+
+    case 3: // Start Auto
+        if(start_ok == false)
+        {
+             qDebug() << "F_Request_Go";
+             start_ok = true;
+              emit(F_Request_Go());
+        }
+         break;
+
+    case 4: // Go to main Strategy State S5
+         i_state_s5x = 0;
+         qDebug() << "F_TransistionToManageStrategyOK";
+         emit(F_TransistionToManageStrategyOK());
+         break;
+    }
+}
+
+
+/**
+ * @brief GameWindow::F_Init_S54
+ * Initialize and Manage Strategy 4
+ */
+void GameWindow::F_Init_S54()
+{
+    switch (i_state_s5x)
+    {
+    case 0:  // send Stop
+        if(stop_ok == false)
+        {
+            qDebug() << "F_Request_Stop";
+             stop_ok = true;
+             emit(F_Request_Stop());
+        }
+         break;
+
+    case 1:  // send Reset List
+        if(reset_ok == false)
+        {
+            qDebug() << "F_RequestResetListWayPoints";
+             reset_ok = true;
+             emit(F_RequestResetListWayPoints());
+        }
+         break;
+
+    case 2: // Start to send New list
+        if(new_list_ok == false)
+        {
+            qDebug() << "F_RequestAddWayPoint";
+             new_list_ok = true;
+             list_WayPoints.resize(0);
+             if(color_yellow== true)
+             {
+                 AddWaypointToList(200, -727, 0);
+                 AddWaypointToList(200, -1250, 0);
+                 AddWaypointToList(900, -1250, 0);
+                 AddWaypointToList(400, -850, 90);
+             }
+             else {
+                 AddWaypointToList(2800, -727, 0);
+                 AddWaypointToList(2800, -1250, 0);
+                 AddWaypointToList(2300, -1250, 0);
+                 AddWaypointToList(2600, -850, 0);
+             }
+
+             Localisation loc = list_WayPoints.first();   // get first point of the list
+             emit(F_RequestAddWayPoint(loc.x, loc.y, loc.teta));
+
+             list_WayPoints.removeFirst();   // Remove the point just sent
+        }
+         break;
+
+    case 3: // Start Auto
+        if(start_ok == false)
+        {
+             qDebug() << "F_Request_Go";
+             start_ok = true;
+              emit(F_Request_Go());
+        }
+         break;
+
+    case 4: // Go to main Strategy State S5
+         i_state_s5x = 0;
+         qDebug() << "F_TransistionToManageStrategyOK";
+         emit(F_TransistionToManageStrategyOK());
+         break;
+    }
 }
