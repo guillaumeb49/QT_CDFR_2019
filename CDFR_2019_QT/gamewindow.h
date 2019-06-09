@@ -34,8 +34,13 @@ private:
     void AddWaypointToList(int16_t x,int16_t y,int16_t theta);
     void F_Init_S51(void);
     void F_Init_S52(void);
+    void F_Init_S521(void);
     void F_Init_S53(void);
     void F_Init_S54(void);
+    void F_Init_S55(void);
+    void F_Init_S56(void);
+    void F_Init_S57(void);
+    void F_Init_S58(void);
 
 private slots:
     void on_btn_start_game_clicked();
@@ -79,8 +84,13 @@ signals:
     void F_TransistionStartGame_and_Go_OK();
     void F_TransistionToS51();
     void F_TransistionToS52();
+    void F_TransistionToS521();
     void F_TransistionToS53();
     void F_TransistionToS54();
+    void F_TransistionToS55();
+    void F_TransistionToS56();
+    void F_TransistionToS57();
+    void F_TransistionToS58();
 
     void F_TransistionToManageStrategyOK();
 

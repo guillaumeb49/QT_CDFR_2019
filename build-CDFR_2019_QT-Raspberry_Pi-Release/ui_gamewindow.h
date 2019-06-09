@@ -63,7 +63,7 @@ public:
     QLabel *lbl_theta;
     QLabel *label_10;
     QLabel *label_20;
-    QLabel *lbl_nb_waypoints;
+    QLabel *lbl_strategy;
     QLabel *lbl_warning_distance;
     QWidget *tab_end_game;
     QWidget *gridLayoutWidget_4;
@@ -275,11 +275,11 @@ public:
 
         gridLayout_2->addWidget(label_20, 3, 0, 1, 1);
 
-        lbl_nb_waypoints = new QLabel(gridLayoutWidget_3);
-        lbl_nb_waypoints->setObjectName(QStringLiteral("lbl_nb_waypoints"));
-        lbl_nb_waypoints->setFont(font1);
+        lbl_strategy = new QLabel(gridLayoutWidget_3);
+        lbl_strategy->setObjectName(QStringLiteral("lbl_strategy"));
+        lbl_strategy->setFont(font1);
 
-        gridLayout_2->addWidget(lbl_nb_waypoints, 3, 1, 1, 1);
+        gridLayout_2->addWidget(lbl_strategy, 3, 1, 1, 1);
 
         lbl_warning_distance = new QLabel(tab_game);
         lbl_warning_distance->setObjectName(QStringLiteral("lbl_warning_distance"));
@@ -326,14 +326,16 @@ public:
         checkBox_2 = new QCheckBox(gridLayoutWidget_4);
         checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
         checkBox_2->setEnabled(true);
-        checkBox_2->setCheckable(false);
+        checkBox_2->setCheckable(true);
+        checkBox_2->setChecked(true);
 
         gridLayout_3->addWidget(checkBox_2, 3, 0, 1, 1);
 
         checkBox = new QCheckBox(gridLayoutWidget_4);
         checkBox->setObjectName(QStringLiteral("checkBox"));
         checkBox->setEnabled(true);
-        checkBox->setCheckable(false);
+        checkBox->setCheckable(true);
+        checkBox->setChecked(true);
 
         gridLayout_3->addWidget(checkBox, 4, 0, 1, 1);
 
@@ -421,20 +423,20 @@ public:
         lbl_y->setText(QString());
         lbl_theta->setText(QString());
         label_10->setText(QApplication::translate("GameWindow", "X", nullptr));
-        label_20->setText(QApplication::translate("GameWindow", "#WayPoints", nullptr));
-        lbl_nb_waypoints->setText(QString());
+        label_20->setText(QApplication::translate("GameWindow", "Strategy", nullptr));
+        lbl_strategy->setText(QString());
         lbl_warning_distance->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_game), QApplication::translate("GameWindow", "Game!", nullptr));
         checkBox_3->setText(QApplication::translate("GameWindow", "Atomes tableau p\303\251riodique", nullptr));
         label_11->setText(QApplication::translate("GameWindow", "Actions r\303\251alis\303\251es", nullptr));
-        label_15->setText(QApplication::translate("GameWindow", "0", nullptr));
+        label_15->setText(QApplication::translate("GameWindow", "15", nullptr));
         checkBox_4->setText(QApplication::translate("GameWindow", "Lib\303\251rer Goldonium", nullptr));
-        checkBox_2->setText(QString());
-        checkBox->setText(QApplication::translate("GameWindow", "D\303\251marrer Exp\303\251rience", nullptr));
-        label_12->setText(QApplication::translate("GameWindow", "0", nullptr));
-        label_14->setText(QApplication::translate("GameWindow", "0", nullptr));
+        checkBox_2->setText(QApplication::translate("GameWindow", "Poser exp\303\251rience", nullptr));
+        checkBox->setText(QApplication::translate("GameWindow", "Activer Exp\303\251rience", nullptr));
+        label_12->setText(QApplication::translate("GameWindow", "?", nullptr));
+        label_14->setText(QApplication::translate("GameWindow", "5", nullptr));
         label_13->setText(QApplication::translate("GameWindow", "20", nullptr));
-        lbl_points_tot->setText(QApplication::translate("GameWindow", "20", nullptr));
+        lbl_points_tot->setText(QApplication::translate("GameWindow", "40", nullptr));
         label_17->setText(QApplication::translate("GameWindow", "TOTAL ", nullptr));
         label_18->setText(QApplication::translate("GameWindow", "Points", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_end_game), QApplication::translate("GameWindow", "End of Game", nullptr));

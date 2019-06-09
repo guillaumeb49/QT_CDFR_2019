@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_GameWindow_t {
-    QByteArrayData data[43];
-    char stringdata0[810];
+    QByteArrayData data[48];
+    char stringdata0[906];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,30 +50,35 @@ QT_MOC_LITERAL(15, 243, 30), // "F_TransistionStartWayPoints_OK"
 QT_MOC_LITERAL(16, 274, 32), // "F_TransistionStartGame_and_Go_OK"
 QT_MOC_LITERAL(17, 307, 18), // "F_TransistionToS51"
 QT_MOC_LITERAL(18, 326, 18), // "F_TransistionToS52"
-QT_MOC_LITERAL(19, 345, 18), // "F_TransistionToS53"
-QT_MOC_LITERAL(20, 364, 18), // "F_TransistionToS54"
-QT_MOC_LITERAL(21, 383, 31), // "F_TransistionToManageStrategyOK"
-QT_MOC_LITERAL(22, 415, 12), // "F_Request_Go"
-QT_MOC_LITERAL(23, 428, 14), // "F_Request_Stop"
-QT_MOC_LITERAL(24, 443, 27), // "F_RequestResetListWayPoints"
-QT_MOC_LITERAL(25, 471, 14), // "F_RequestServo"
-QT_MOC_LITERAL(26, 486, 7), // "uint8_t"
-QT_MOC_LITERAL(27, 494, 25), // "F_TransistionEndOfGame_OK"
-QT_MOC_LITERAL(28, 520, 30), // "F_TransistionDisplayResults_OK"
-QT_MOC_LITERAL(29, 551, 25), // "on_btn_start_game_clicked"
-QT_MOC_LITERAL(30, 577, 18), // "ManageStateMachine"
-QT_MOC_LITERAL(31, 596, 18), // "F_UpdateTimer_game"
-QT_MOC_LITERAL(32, 615, 15), // "F_UpdateGetInfo"
-QT_MOC_LITERAL(33, 631, 8), // "uint16_t"
-QT_MOC_LITERAL(34, 640, 9), // "nb_points"
-QT_MOC_LITERAL(35, 650, 20), // "distance_warning_rob"
-QT_MOC_LITERAL(36, 671, 15), // "F_UpdateTirette"
-QT_MOC_LITERAL(37, 687, 5), // "state"
-QT_MOC_LITERAL(38, 693, 16), // "F_UpdatePosition"
-QT_MOC_LITERAL(39, 710, 19), // "F_UpdateSetPosition"
-QT_MOC_LITERAL(40, 730, 25), // "F_ManageAdditionWayPoints"
-QT_MOC_LITERAL(41, 756, 26), // "F_UpdateEnable_DisableAuto"
-QT_MOC_LITERAL(42, 783, 26) // "F_UpdateResetListWayPoints"
+QT_MOC_LITERAL(19, 345, 19), // "F_TransistionToS521"
+QT_MOC_LITERAL(20, 365, 18), // "F_TransistionToS53"
+QT_MOC_LITERAL(21, 384, 18), // "F_TransistionToS54"
+QT_MOC_LITERAL(22, 403, 18), // "F_TransistionToS55"
+QT_MOC_LITERAL(23, 422, 18), // "F_TransistionToS56"
+QT_MOC_LITERAL(24, 441, 18), // "F_TransistionToS57"
+QT_MOC_LITERAL(25, 460, 18), // "F_TransistionToS58"
+QT_MOC_LITERAL(26, 479, 31), // "F_TransistionToManageStrategyOK"
+QT_MOC_LITERAL(27, 511, 12), // "F_Request_Go"
+QT_MOC_LITERAL(28, 524, 14), // "F_Request_Stop"
+QT_MOC_LITERAL(29, 539, 27), // "F_RequestResetListWayPoints"
+QT_MOC_LITERAL(30, 567, 14), // "F_RequestServo"
+QT_MOC_LITERAL(31, 582, 7), // "uint8_t"
+QT_MOC_LITERAL(32, 590, 25), // "F_TransistionEndOfGame_OK"
+QT_MOC_LITERAL(33, 616, 30), // "F_TransistionDisplayResults_OK"
+QT_MOC_LITERAL(34, 647, 25), // "on_btn_start_game_clicked"
+QT_MOC_LITERAL(35, 673, 18), // "ManageStateMachine"
+QT_MOC_LITERAL(36, 692, 18), // "F_UpdateTimer_game"
+QT_MOC_LITERAL(37, 711, 15), // "F_UpdateGetInfo"
+QT_MOC_LITERAL(38, 727, 8), // "uint16_t"
+QT_MOC_LITERAL(39, 736, 9), // "nb_points"
+QT_MOC_LITERAL(40, 746, 20), // "distance_warning_rob"
+QT_MOC_LITERAL(41, 767, 15), // "F_UpdateTirette"
+QT_MOC_LITERAL(42, 783, 5), // "state"
+QT_MOC_LITERAL(43, 789, 16), // "F_UpdatePosition"
+QT_MOC_LITERAL(44, 806, 19), // "F_UpdateSetPosition"
+QT_MOC_LITERAL(45, 826, 25), // "F_ManageAdditionWayPoints"
+QT_MOC_LITERAL(46, 852, 26), // "F_UpdateEnable_DisableAuto"
+QT_MOC_LITERAL(47, 879, 26) // "F_UpdateResetListWayPoints"
 
     },
     "GameWindow\0F_RequestUpdateTirette\0\0"
@@ -87,8 +92,10 @@ QT_MOC_LITERAL(42, 783, 26) // "F_UpdateResetListWayPoints"
     "F_TransistionStartWayPoints_OK\0"
     "F_TransistionStartGame_and_Go_OK\0"
     "F_TransistionToS51\0F_TransistionToS52\0"
-    "F_TransistionToS53\0F_TransistionToS54\0"
-    "F_TransistionToManageStrategyOK\0"
+    "F_TransistionToS521\0F_TransistionToS53\0"
+    "F_TransistionToS54\0F_TransistionToS55\0"
+    "F_TransistionToS56\0F_TransistionToS57\0"
+    "F_TransistionToS58\0F_TransistionToManageStrategyOK\0"
     "F_Request_Go\0F_Request_Stop\0"
     "F_RequestResetListWayPoints\0F_RequestServo\0"
     "uint8_t\0F_TransistionEndOfGame_OK\0"
@@ -109,48 +116,53 @@ static const uint qt_meta_data_GameWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
+      37,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      22,       // signalCount
+      27,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  174,    2, 0x06 /* Public */,
-       3,    3,  175,    2, 0x06 /* Public */,
-       8,    0,  182,    2, 0x06 /* Public */,
-       9,    0,  183,    2, 0x06 /* Public */,
-      10,    3,  184,    2, 0x06 /* Public */,
-      11,    0,  191,    2, 0x06 /* Public */,
-      12,    0,  192,    2, 0x06 /* Public */,
-      13,    0,  193,    2, 0x06 /* Public */,
-      14,    0,  194,    2, 0x06 /* Public */,
-      15,    0,  195,    2, 0x06 /* Public */,
-      16,    0,  196,    2, 0x06 /* Public */,
-      17,    0,  197,    2, 0x06 /* Public */,
-      18,    0,  198,    2, 0x06 /* Public */,
-      19,    0,  199,    2, 0x06 /* Public */,
-      20,    0,  200,    2, 0x06 /* Public */,
-      21,    0,  201,    2, 0x06 /* Public */,
-      22,    0,  202,    2, 0x06 /* Public */,
-      23,    0,  203,    2, 0x06 /* Public */,
-      24,    0,  204,    2, 0x06 /* Public */,
-      25,    1,  205,    2, 0x06 /* Public */,
-      27,    0,  208,    2, 0x06 /* Public */,
-      28,    0,  209,    2, 0x06 /* Public */,
+       1,    0,  199,    2, 0x06 /* Public */,
+       3,    3,  200,    2, 0x06 /* Public */,
+       8,    0,  207,    2, 0x06 /* Public */,
+       9,    0,  208,    2, 0x06 /* Public */,
+      10,    3,  209,    2, 0x06 /* Public */,
+      11,    0,  216,    2, 0x06 /* Public */,
+      12,    0,  217,    2, 0x06 /* Public */,
+      13,    0,  218,    2, 0x06 /* Public */,
+      14,    0,  219,    2, 0x06 /* Public */,
+      15,    0,  220,    2, 0x06 /* Public */,
+      16,    0,  221,    2, 0x06 /* Public */,
+      17,    0,  222,    2, 0x06 /* Public */,
+      18,    0,  223,    2, 0x06 /* Public */,
+      19,    0,  224,    2, 0x06 /* Public */,
+      20,    0,  225,    2, 0x06 /* Public */,
+      21,    0,  226,    2, 0x06 /* Public */,
+      22,    0,  227,    2, 0x06 /* Public */,
+      23,    0,  228,    2, 0x06 /* Public */,
+      24,    0,  229,    2, 0x06 /* Public */,
+      25,    0,  230,    2, 0x06 /* Public */,
+      26,    0,  231,    2, 0x06 /* Public */,
+      27,    0,  232,    2, 0x06 /* Public */,
+      28,    0,  233,    2, 0x06 /* Public */,
+      29,    0,  234,    2, 0x06 /* Public */,
+      30,    1,  235,    2, 0x06 /* Public */,
+      32,    0,  238,    2, 0x06 /* Public */,
+      33,    0,  239,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      29,    0,  210,    2, 0x08 /* Private */,
-      30,    0,  211,    2, 0x08 /* Private */,
-      31,    0,  212,    2, 0x0a /* Public */,
-      32,    5,  213,    2, 0x0a /* Public */,
-      36,    1,  224,    2, 0x0a /* Public */,
-      38,    3,  227,    2, 0x0a /* Public */,
-      39,    0,  234,    2, 0x0a /* Public */,
-      40,    1,  235,    2, 0x0a /* Public */,
-      41,    1,  238,    2, 0x0a /* Public */,
-      42,    0,  241,    2, 0x0a /* Public */,
+      34,    0,  240,    2, 0x08 /* Private */,
+      35,    0,  241,    2, 0x08 /* Private */,
+      36,    0,  242,    2, 0x0a /* Public */,
+      37,    5,  243,    2, 0x0a /* Public */,
+      41,    1,  254,    2, 0x0a /* Public */,
+      43,    3,  257,    2, 0x0a /* Public */,
+      44,    0,  264,    2, 0x0a /* Public */,
+      45,    1,  265,    2, 0x0a /* Public */,
+      46,    1,  268,    2, 0x0a /* Public */,
+      47,    0,  271,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -172,7 +184,12 @@ static const uint qt_meta_data_GameWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 26,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 31,    2,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -180,12 +197,12 @@ static const uint qt_meta_data_GameWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 33, 0x80000000 | 33, 0x80000000 | 33, 0x80000000 | 26, 0x80000000 | 26,    5,    6,    7,   34,   35,
-    QMetaType::Void, 0x80000000 | 33,   37,
-    QMetaType::Void, 0x80000000 | 33, 0x80000000 | 33, 0x80000000 | 33,    5,    6,    7,
+    QMetaType::Void, 0x80000000 | 38, 0x80000000 | 38, 0x80000000 | 38, 0x80000000 | 31, 0x80000000 | 31,    5,    6,    7,   39,   40,
+    QMetaType::Void, 0x80000000 | 38,   42,
+    QMetaType::Void, 0x80000000 | 38, 0x80000000 | 38, 0x80000000 | 38,    5,    6,    7,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 33,   37,
-    QMetaType::Void, 0x80000000 | 33,    2,
+    QMetaType::Void, 0x80000000 | 38,   42,
+    QMetaType::Void, 0x80000000 | 38,    2,
     QMetaType::Void,
 
        0        // eod
@@ -210,25 +227,30 @@ void GameWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->F_TransistionStartGame_and_Go_OK(); break;
         case 11: _t->F_TransistionToS51(); break;
         case 12: _t->F_TransistionToS52(); break;
-        case 13: _t->F_TransistionToS53(); break;
-        case 14: _t->F_TransistionToS54(); break;
-        case 15: _t->F_TransistionToManageStrategyOK(); break;
-        case 16: _t->F_Request_Go(); break;
-        case 17: _t->F_Request_Stop(); break;
-        case 18: _t->F_RequestResetListWayPoints(); break;
-        case 19: _t->F_RequestServo((*reinterpret_cast< uint8_t(*)>(_a[1]))); break;
-        case 20: _t->F_TransistionEndOfGame_OK(); break;
-        case 21: _t->F_TransistionDisplayResults_OK(); break;
-        case 22: _t->on_btn_start_game_clicked(); break;
-        case 23: _t->ManageStateMachine(); break;
-        case 24: _t->F_UpdateTimer_game(); break;
-        case 25: _t->F_UpdateGetInfo((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3])),(*reinterpret_cast< uint8_t(*)>(_a[4])),(*reinterpret_cast< uint8_t(*)>(_a[5]))); break;
-        case 26: _t->F_UpdateTirette((*reinterpret_cast< uint16_t(*)>(_a[1]))); break;
-        case 27: _t->F_UpdatePosition((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3]))); break;
-        case 28: _t->F_UpdateSetPosition(); break;
-        case 29: _t->F_ManageAdditionWayPoints((*reinterpret_cast< uint16_t(*)>(_a[1]))); break;
-        case 30: _t->F_UpdateEnable_DisableAuto((*reinterpret_cast< uint16_t(*)>(_a[1]))); break;
-        case 31: _t->F_UpdateResetListWayPoints(); break;
+        case 13: _t->F_TransistionToS521(); break;
+        case 14: _t->F_TransistionToS53(); break;
+        case 15: _t->F_TransistionToS54(); break;
+        case 16: _t->F_TransistionToS55(); break;
+        case 17: _t->F_TransistionToS56(); break;
+        case 18: _t->F_TransistionToS57(); break;
+        case 19: _t->F_TransistionToS58(); break;
+        case 20: _t->F_TransistionToManageStrategyOK(); break;
+        case 21: _t->F_Request_Go(); break;
+        case 22: _t->F_Request_Stop(); break;
+        case 23: _t->F_RequestResetListWayPoints(); break;
+        case 24: _t->F_RequestServo((*reinterpret_cast< uint8_t(*)>(_a[1]))); break;
+        case 25: _t->F_TransistionEndOfGame_OK(); break;
+        case 26: _t->F_TransistionDisplayResults_OK(); break;
+        case 27: _t->on_btn_start_game_clicked(); break;
+        case 28: _t->ManageStateMachine(); break;
+        case 29: _t->F_UpdateTimer_game(); break;
+        case 30: _t->F_UpdateGetInfo((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3])),(*reinterpret_cast< uint8_t(*)>(_a[4])),(*reinterpret_cast< uint8_t(*)>(_a[5]))); break;
+        case 31: _t->F_UpdateTirette((*reinterpret_cast< uint16_t(*)>(_a[1]))); break;
+        case 32: _t->F_UpdatePosition((*reinterpret_cast< uint16_t(*)>(_a[1])),(*reinterpret_cast< uint16_t(*)>(_a[2])),(*reinterpret_cast< uint16_t(*)>(_a[3]))); break;
+        case 33: _t->F_UpdateSetPosition(); break;
+        case 34: _t->F_ManageAdditionWayPoints((*reinterpret_cast< uint16_t(*)>(_a[1]))); break;
+        case 35: _t->F_UpdateEnable_DisableAuto((*reinterpret_cast< uint16_t(*)>(_a[1]))); break;
+        case 36: _t->F_UpdateResetListWayPoints(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -326,64 +348,99 @@ void GameWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS53)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS521)) {
                 *result = 13;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS54)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS53)) {
                 *result = 14;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToManageStrategyOK)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS54)) {
                 *result = 15;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_Request_Go)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS55)) {
                 *result = 16;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_Request_Stop)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS56)) {
                 *result = 17;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_RequestResetListWayPoints)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS57)) {
                 *result = 18;
                 return;
             }
         }
         {
-            typedef void (GameWindow::*_t)(uint8_t );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_RequestServo)) {
+            typedef void (GameWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToS58)) {
                 *result = 19;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionEndOfGame_OK)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionToManageStrategyOK)) {
                 *result = 20;
                 return;
             }
         }
         {
             typedef void (GameWindow::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionDisplayResults_OK)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_Request_Go)) {
                 *result = 21;
+                return;
+            }
+        }
+        {
+            typedef void (GameWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_Request_Stop)) {
+                *result = 22;
+                return;
+            }
+        }
+        {
+            typedef void (GameWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_RequestResetListWayPoints)) {
+                *result = 23;
+                return;
+            }
+        }
+        {
+            typedef void (GameWindow::*_t)(uint8_t );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_RequestServo)) {
+                *result = 24;
+                return;
+            }
+        }
+        {
+            typedef void (GameWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionEndOfGame_OK)) {
+                *result = 25;
+                return;
+            }
+        }
+        {
+            typedef void (GameWindow::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GameWindow::F_TransistionDisplayResults_OK)) {
+                *result = 26;
                 return;
             }
         }
@@ -415,13 +472,13 @@ int GameWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 37)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 37;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 37)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 32;
+        _id -= 37;
     }
     return _id;
 }
@@ -507,58 +564,88 @@ void GameWindow::F_TransistionToS52()
 }
 
 // SIGNAL 13
-void GameWindow::F_TransistionToS53()
+void GameWindow::F_TransistionToS521()
 {
     QMetaObject::activate(this, &staticMetaObject, 13, nullptr);
 }
 
 // SIGNAL 14
-void GameWindow::F_TransistionToS54()
+void GameWindow::F_TransistionToS53()
 {
     QMetaObject::activate(this, &staticMetaObject, 14, nullptr);
 }
 
 // SIGNAL 15
-void GameWindow::F_TransistionToManageStrategyOK()
+void GameWindow::F_TransistionToS54()
 {
     QMetaObject::activate(this, &staticMetaObject, 15, nullptr);
 }
 
 // SIGNAL 16
-void GameWindow::F_Request_Go()
+void GameWindow::F_TransistionToS55()
 {
     QMetaObject::activate(this, &staticMetaObject, 16, nullptr);
 }
 
 // SIGNAL 17
-void GameWindow::F_Request_Stop()
+void GameWindow::F_TransistionToS56()
 {
     QMetaObject::activate(this, &staticMetaObject, 17, nullptr);
 }
 
 // SIGNAL 18
-void GameWindow::F_RequestResetListWayPoints()
+void GameWindow::F_TransistionToS57()
 {
     QMetaObject::activate(this, &staticMetaObject, 18, nullptr);
 }
 
 // SIGNAL 19
-void GameWindow::F_RequestServo(uint8_t _t1)
+void GameWindow::F_TransistionToS58()
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 19, _a);
+    QMetaObject::activate(this, &staticMetaObject, 19, nullptr);
 }
 
 // SIGNAL 20
-void GameWindow::F_TransistionEndOfGame_OK()
+void GameWindow::F_TransistionToManageStrategyOK()
 {
     QMetaObject::activate(this, &staticMetaObject, 20, nullptr);
 }
 
 // SIGNAL 21
-void GameWindow::F_TransistionDisplayResults_OK()
+void GameWindow::F_Request_Go()
 {
     QMetaObject::activate(this, &staticMetaObject, 21, nullptr);
+}
+
+// SIGNAL 22
+void GameWindow::F_Request_Stop()
+{
+    QMetaObject::activate(this, &staticMetaObject, 22, nullptr);
+}
+
+// SIGNAL 23
+void GameWindow::F_RequestResetListWayPoints()
+{
+    QMetaObject::activate(this, &staticMetaObject, 23, nullptr);
+}
+
+// SIGNAL 24
+void GameWindow::F_RequestServo(uint8_t _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 24, _a);
+}
+
+// SIGNAL 25
+void GameWindow::F_TransistionEndOfGame_OK()
+{
+    QMetaObject::activate(this, &staticMetaObject, 25, nullptr);
+}
+
+// SIGNAL 26
+void GameWindow::F_TransistionDisplayResults_OK()
+{
+    QMetaObject::activate(this, &staticMetaObject, 26, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
